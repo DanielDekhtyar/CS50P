@@ -1,0 +1,1 @@
+is_char_between_6_and_2 and is_start_with_2_letters and is_first_char_zero and check_special_chars and is_numbers_after_letters
