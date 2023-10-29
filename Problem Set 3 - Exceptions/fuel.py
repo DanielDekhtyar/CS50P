@@ -2,7 +2,7 @@
 # Fuel Gauge
 # https://cs50.harvard.edu/python/2022/psets/3/fuel/
 
-'''
+
 def main():
     fuel = fuelGauge()
     if fuel <= 1 and fuel >= 0:
@@ -33,8 +33,8 @@ def fuelGauge():
 
 main()
 
-'''
 
+'''
 # Code for 'Refueling'
 # https://cs50.harvard.edu/python/2022/psets/5/test_fuel/
 
@@ -73,3 +73,4 @@ def gauge(fuel):
 
 if __name__ == "__main__":
     main()
+'''

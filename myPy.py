@@ -1,3 +1,5 @@
+# My own code to use later
+
 def getPositiveInt(userInputToPrint=""):
     while True:
         number = input(userInputToPrint)
