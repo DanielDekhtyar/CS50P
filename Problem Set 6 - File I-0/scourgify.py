@@ -18,16 +18,17 @@ def main():
         except FileNotFoundError:
             print(f"Could not read {before_csv}")
             sys.exit(1)
+            
+        with open(after_csv, 'w', newline = '') as after:
+            writer = csv.DictWriter(after, fieldnames = ["first", "last", "house"])
+            writer.writeheader()
+            for row in reader:
+                last, first = row["name"].split(",")
+                house = row["house"]
+                writer.writerow({"first" : first.strip(), "last" : last.strip(), "house" : house.strip()})
         
-        for row in reader:
-            last, first = row["name"].split(",")
-            house = row["house"]
-            with open(after_csv, 'a', newline = '') as after:
-                writer = csv.writer(after)
-                writer.writerow([first.strip(), last.strip(), house.strip()])
-                
         before.close()
-        
+    
     else:
         sys.exit(1)
 
