@@ -7,18 +7,19 @@ import sys
 import csv
 import tabulate
 
+
 def main():
     if is_argv_valid():
         file_location = sys.argv[1]
         try:
-            with open(file_location, 'r') as csv_file:
+            with open(file_location, "r") as csv_file:
                 csv_reader = csv.reader(csv_file)
                 data = [row for row in csv_reader]
         except FileNotFoundError:
             sys.exit(1)
-        
+
         # Print the data in a grid format
-        table = tabulate.tabulate(data, headers='firstrow', tablefmt='grid')
+        table = tabulate.tabulate(data, headers="firstrow", tablefmt="grid")
         print(table)
     else:
         sys.exit(1)

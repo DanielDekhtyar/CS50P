@@ -21,14 +21,14 @@ def main():
     elif ext1 != ext2:
         print("Input and output have different extensions")
         sys.exit(1)
-    
+
     try:
-        shirt = Image.open("shirt.png", mode= 'r')
-        muppet = Image.open(sys.argv[1], mode='r')
+        shirt = Image.open("shirt.png", mode="r")
+        muppet = Image.open(sys.argv[1], mode="r")
     except FileNotFoundError:
         print("Input does not exist")
         sys.exit(1)
-    
+
     size = shirt.size
     # Resize shirt to fit muppet
     muppet = ImageOps.fit(muppet, size)

@@ -16,7 +16,7 @@ def main():
             print("File does not exist")
             sys.exit(1)
         for line in file:
-            if line.strip().startswith('#') or line.isspace():
+            if line.strip().startswith("#") or line.isspace():
                 continue
             else:
                 line_counter += 1
