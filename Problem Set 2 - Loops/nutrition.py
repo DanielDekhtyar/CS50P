@@ -2,6 +2,7 @@
 # Nutrition Facts
 # https://cs50.harvard.edu/python/2022/psets/2/nutrition/
 
+
 def main():
     item = input("Item: ").lower()
     fruits = {
@@ -24,10 +25,11 @@ def main():
         "strawberries": "50",
         "sweet cherries": "100",
         "tangerine": "50",
-        "watermelon": "80"
+        "watermelon": "80",
     }
 
     if item in fruits:
         print("Calories: ", fruits[item])
+
 
 main()

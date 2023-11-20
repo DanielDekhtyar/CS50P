@@ -2,7 +2,7 @@
 # Just setting up my twttr
 # https://cs50.harvard.edu/python/2022/psets/2/twttr/
 
-'''
+"""
 def main():
   txt = input("Input: ")
   print("Output: " , end="")
@@ -16,27 +16,27 @@ def main():
 
 
 main()
-'''
+"""
 
 # Code for 'Testing my twttr'
 # https://cs50.harvard.edu/python/2022/psets/5/test_twttr/
 
+
 def main():
-    word : str = input("Input: ").strip().lower()
-    print("Output: ", shorten(word) , sep='')
-    
+    word: str = input("Input: ").strip().lower()
+    print("Output: ", shorten(word), sep="")
 
 
 def shorten(word):
-  new_str = ''
-  vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
-  for i in range(len(word)):
-    if word[i].isalpha():
-      if word[i] not in vowels:
-        new_str += word[i]
-    else:
-      new_str += word[i]
-  return new_str
+    new_str = ""
+    vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]
+    for i in range(len(word)):
+        if word[i].isalpha():
+            if word[i] not in vowels:
+                new_str += word[i]
+        else:
+            new_str += word[i]
+    return new_str
 
 
 if __name__ == "__main__":
