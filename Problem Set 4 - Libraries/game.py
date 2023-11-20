@@ -3,6 +3,8 @@
 # https://cs50.harvard.edu/python/2022/psets/4/game/
 
 import random
+
+
 def main():
     n = getPositiveInt("Level: ")
     randomNum = random.randint(1, n)
@@ -26,8 +28,6 @@ def getPositiveInt(inputText):
             return int(number)
         else:
             pass
-
-
 
 
 main()

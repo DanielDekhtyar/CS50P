@@ -18,9 +18,9 @@ def main():
     elif len(nameList) == 2:
         print("Adieu, adieu, to", nameList[0], "and", nameList[1])
     else:
-        print("Adieu, adieu, to", nameList[0], end=', ')
+        print("Adieu, adieu, to", nameList[0], end=", ")
         for nameIndex in nameList[1:-1]:
-            print(nameIndex, end=', ')
+            print(nameIndex, end=", ")
         print("and", nameList[-1])
 
 

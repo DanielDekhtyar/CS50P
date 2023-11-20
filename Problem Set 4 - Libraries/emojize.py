@@ -4,9 +4,12 @@
 
 import sys
 import emoji
+
+
 def main():
     emojiTextFormat = input("Input: ")
     emojiPicFormat = emoji.emojize(emojiTextFormat)
     print("Output: " + emojiPicFormat)
+
 
 main()

@@ -3,6 +3,8 @@
 # https://cs50.harvard.edu/python/2022/psets/4/professor/
 
 import random
+
+
 def main():
     level = get_level()
     score = 0
@@ -17,7 +19,9 @@ def main():
                 score += 1
                 break
             else:
-                if i < 2: # 'i' initialized as 0 at the start of the 'for' loop and goes up to 2; aka 3 times
+                if (
+                    i < 2
+                ):  # 'i' initialized as 0 at the start of the 'for' loop and goes up to 2; aka 3 times
                     print("EEE")
                     continue
                 else:

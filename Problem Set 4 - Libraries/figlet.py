@@ -5,9 +5,11 @@
 import sys
 import random
 from pyfiglet import Figlet
+
+
 def main():
     figlet = Figlet()
-    if not (sys.argv[1] == '-f' or sys.argv[1] == '--font'):
+    if not (sys.argv[1] == "-f" or sys.argv[1] == "--font"):
         sys.exit(1)
 
     if len(sys.argv) == 3:
@@ -20,7 +22,7 @@ def main():
         if sys.argv[2] not in fontsList:
             sys.exit(1)
         randomFontIndex = random.randint(0, len(fontsList))
-        figlet.setFont(font = fontsList[randomFontIndex])
+        figlet.setFont(font=fontsList[randomFontIndex])
         textToPrint = input("Input : ")
         print(figlet.renderText(textToPrint))
 
