@@ -18,7 +18,8 @@ def main():
 
 def convert(s):
     time = re.search(
-        r"^(.|.{2})(:[0-5][0-9])? (AM|PM) to (.|.{2})(:[0-5][0-9])? (AM|PM)$", s)
+        r"^(.|.{2})(:[0-5][0-9])? (AM|PM) to (.|.{2})(:[0-5][0-9])? (AM|PM)$", s
+    )
     if time is not None:
         time1 = time.group(1)
         time2 = time.group(4)
