@@ -10,31 +10,31 @@ def main():
     elif fuel >= 99 and fuel <= 100:
         print("F")
     elif fuel > 1 and fuel < 99:
-        print(fuel, '%', sep='')
+        print(fuel, "%", sep="")
+
 
 def fuelGauge():
     while True:
         try:
             fuel = input("Fraction: ")
-            x, y = fuel.split('/')
+            x, y = fuel.split("/")
             x = int(x)
             y = int(y)
             if x > y:
                 continue
             elif not isinstance(x, int) or not isinstance(y, int):
                 continue
-            fuel = (x / y)*100
+            fuel = (x / y) * 100
             fuel = round(fuel)
             return fuel
         except (ValueError, ZeroDivisionError):
             pass
 
 
-
 main()
 
 
-'''
+"""
 # Code for 'Refueling'
 # https://cs50.harvard.edu/python/2022/psets/5/test_fuel/
 
@@ -73,4 +73,4 @@ def gauge(fuel):
 
 if __name__ == "__main__":
     main()
-'''
+"""
