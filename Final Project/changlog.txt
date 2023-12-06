@@ -1,0 +1,12 @@
+Version : 0.1.0
+Last update : 06/12/2023
+
+0.1.0 (06-12-2023)
+Main menu:
+>> Title added
+>> X exit button added
+>> X button functionality implemented
+>> Background image added
+>> Screen set to fullscreen
+>> Level buttons added (not clickable yet)
+>> When mouse over a button, a hand courser appears
