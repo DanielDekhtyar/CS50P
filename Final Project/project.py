@@ -13,8 +13,7 @@ GitHub : https://github.com/DanielDekhtyar
 import sys
 import pygame
 
-from src import start_screen
-from src import game_loop
+from src import start_screen, game_loop
 
 
 def main():
@@ -28,18 +27,22 @@ def main():
     pygame.display.set_caption("Hangman (Daniel's CS50P Final Project)")
     # Set screen size and alow the screen to be resizable
     # (0, 0) means that the screen size will be set automatically
-    screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE, pygame.FULLSCREEN)
-    screen_width = screen.get_width()
-    screen_height = screen.get_height()
+    screen: pygame.Surface = pygame.display.set_mode(
+        (0, 0), pygame.RESIZABLE, pygame.FULLSCREEN
+    )
+    screen_width: int = screen.get_width()
+    screen_height: int = screen.get_height()
 
     # Select the background image
-    bg_image_path = "CS50P/Final Project/images/background_image.png"
+    bg_image_path: str = "CS50P/Final Project/images/background_image.png"
     # Load the background image
-    bg_image = pygame.image.load(bg_image_path)
+    bg_image: pygame.Surface = pygame.image.load(bg_image_path)
     # Clean the screen. Make it completely white
     screen.fill((255, 255, 255))
     # Scale the background image to the size of the screen
-    bg_image = pygame.transform.scale(bg_image, (screen_width, screen_height))
+    bg_image: pygame.Surface = pygame.transform.scale(
+        bg_image, (screen_width, screen_height)
+    )
     # Draw the background image.(0, 0) the image will render at the top left corner of the screen
     screen.blit(bg_image, (0, 0))
 

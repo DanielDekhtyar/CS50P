@@ -1,5 +1,12 @@
-Version : 0.1.0
-Last update : 06/12/2023
+** Date format DD/MM/YYYY
+
+Version : 0.1.1
+Last update : 10/12/2023
+
+
+0.1.1 (10-12-2023)
+>> Type annotations added to project.py, game_loop.py, start_screen.py
+
 
 0.1.0 (06-12-2023)
 Main menu:
