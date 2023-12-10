@@ -38,9 +38,7 @@ def render_title(screen: pygame) -> pygame.Rect:
     return title_rect
 
 
-def render_buttons(
-    screen: pygame.Surface, title_rect: pygame.Rect
-) -> tuple[pygame.Rect]:
+def render_buttons(screen: pygame.Surface, title_rect: pygame.Rect) -> tuple[pygame.Rect]:
     """
     The `render_buttons` function renders four level buttons on the screen and returns the rectangle
     objects representing their positions.
