@@ -7,7 +7,9 @@ game_loop.py contains the functions for the main game loop of the game.
 
 
 # Making pointing hand cursor when hovering over a button
-def mouse_when_over_button(X_button_rect: pygame.Rect, level_buttons_rect: list[pygame.Rect]):
+def mouse_when_over_button(
+    X_button_rect: pygame.Rect, level_buttons_rect: list[pygame.Rect]
+):
     """
     The function `mouse_when_over_button` changes the cursor to a pointing hand when the mouse is
     hovering over a button, and changes it back to an arrow when not hovering over a button.
