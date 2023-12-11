@@ -109,10 +109,27 @@ def render_buttons(
 
 
 def render_X_button(screen: pygame.Surface) -> pygame.Rect:
+    """
+    The function `render_X_button` renders an exit button with the letter "X" on the screen using the
+    pygame library and returns the rectangle object representing the button's position.
+    
+    :param screen: The `screen` parameter is a `pygame.Surface` object representing the surface on which
+    the button will be rendered
+    :type screen: pygame.Surface
+    :return: the rect attribute of the Button object, which represents the rectangular area occupied by
+    the button on the screen.
+    """
+    # Set text font
     font = pygame.font.Font(set_font.exit_button_font(), 55)
-    text = "X"
+    # The text of the button
+    text: str = "X"
+    # Create an instance of the exit (big X) button as a Button class
     button = Button(text, font, 55)
+    # Set the X position of the exit button
     button.set_x(screen.get_width() - button.get_width() - 65)
+    # Set the Y position of the exit button
     button.set_y(25)
+    # Draw the button on the screen
     button.draw(screen)
-    return button._rect  # Return the rect attribute for later use
+    # Return the rect attribute for later use
+    return button._rect
