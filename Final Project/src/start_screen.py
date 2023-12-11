@@ -1,6 +1,7 @@
 import pygame
 
 from font import set_font
+from classes.button import Button
 
 
 """
@@ -107,29 +108,11 @@ def render_buttons(
     return image1_rect, image2_rect, image3_rect, image4_rect
 
 
-def render_X_button(screen: pygame) -> pygame.Rect:
-    """
-    The function `render_X_button` renders an "X" button on the screen at the top right corner.
-
-    :param screen: The "screen" parameter is the pygame surface on which the X button will be
-    rendered. It represents the window or display where the game or application is being shown
-    :type screen: pygame
-    :return: a pygame.Rect object.
-    """
-    # Choose the font of the title
+def render_X_button(screen: pygame.Surface) -> pygame.Rect:
     font = pygame.font.Font(set_font.exit_button_font(), 55)
-    # Title text
-    text: str = "X"
-    # Render the text
-    render = font.render(text, True, (0, 0, 0))
-    # Get the rect of the rendered text
-    rect: pygame.Rect = render.get_rect()
-    # Position the text at the top right corner of the screen
-    # -65 is the margin from the right side of the screen
-    rect.x: int = screen.get_width() - rect.width - 65
-    # Adjust this value to set the vertical position
-    rect.y: int = 25
-    # Draw the text
-    screen.blit(render, rect)
-    # rect obj returns to later know when the mouse hovers over it
-    return rect
+    text = "X"
+    button = Button(text, font, 55)
+    button.set_x(screen.get_width() - button.get_width() - 65)
+    button.set_y(25)
+    button.draw(screen)
+    return button._rect  # Return the rect attribute for later use

@@ -4,7 +4,7 @@
 
 ### _You can find the final project instructions [here](https://cs50.harvard.edu/python/2022/project/)_
 
-![CS50 Duck Debugger](<images/CS50 Duck Debugger.png>)
+![CS50 Duck Debugger](https://cs50.gallerycdn.vsassets.io/extensions/cs50/ddb50/1.1.2/1691002683906/Microsoft.VisualStudio.Services.Icons.Default)
 
 ---
 
@@ -17,7 +17,7 @@
 > _Date format DD-MM-YYYY_
 
 
-### **[0.1.1] - 10-12-2023** (latest commit)
+### **[0.1.1] - 10-12-2023** (commit 449a3ad)
 ---
 #### Changed
 - Type annotations added to project.py, game_loop.py, start_screen.py
