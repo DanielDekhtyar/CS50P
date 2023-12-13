@@ -46,12 +46,22 @@ def main():
     # Draw the background image.(0, 0) the image will render at the top left corner of the screen
     screen.blit(bg_image, (0, 0))
 
+    # A list of all the buttons (Button class instances) in the game
+    all_button_instances = []
+
     # Render the title "HANGMAN"
     title_rect: pygame.Rect = start_screen.render_title(screen)
+
     # Render the buttons "Level 1", "Level 2", "Level 3", "Level 4"
     level_buttons_rect: pygame.Rect = start_screen.render_buttons(screen, title_rect)
+    # Add the newly created level buttons in to all_button_instances list
+    all_button_instances.extend(level_buttons_rect)
+
     # Render the X button on the top right corner
-    X_button_rect: pygame.Rect = start_screen.render_X_button(screen)
+    X_button: pygame.Rect = start_screen.render_X_button(screen)
+    # Add the newly created exit button in to all_button_instances list
+    all_button_instances.append(X_button)
+
     # Game runs until 'is_playing' is set to False. aka click the red X button
     is_playing: bool = True
 
@@ -59,14 +69,16 @@ def main():
     while is_playing:
         for event in pygame.event.get():
             # Making pointing hand cursor when hovering over a button
-            game_loop.mouse_when_over_button(X_button_rect, level_buttons_rect)
+            game_loop.mouse_when_over_button(all_button_instances)
             # If the X button is clicked, the game will exit
-            is_playing = game_loop.exit_game(X_button_rect, event)
+            is_playing = game_loop.exit_game(X_button, event)
             if is_playing is False:
                 break
 
         # Updating the screen each time we change something
         pygame.display.flip()
+
+    print("Thank you for playing Hangman!")
 
     pygame.quit()
     sys.exit(0)

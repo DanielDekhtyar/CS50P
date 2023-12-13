@@ -1,69 +1,76 @@
-import pygame
-
-
 """
 game_loop.py contains the functions for the main game loop of the game.
 """
 
+import pygame
+
 
 # Making pointing hand cursor when hovering over a button
-def mouse_when_over_button(
-    X_button_rect: pygame.Rect, level_buttons_rect: list[pygame.Rect]
-):
+def mouse_when_over_button(all_button_instances):
     """
-    The function `mouse_when_over_button` changes the cursor to a pointing hand when the mouse is
-    hovering over a button, and changes it back to an arrow when not hovering over a button.
+    The function `mouse_when_over_button` checks if the mouse is over any active button
+    and changes the cursor type accordingly.
 
-    :param X_button_rect: The X_button_rect parameter is a pygame.Rect object that represents the
-    rectangular area of the X button. It is used to check if the mouse is hovering over the X button
-    :type X_button_rect: pygame.Rect
-    :param level_buttons_rect: The parameter `level_buttons_rect` is a list of `pygame.Rect` objects
-    representing the rectangles of the level buttons on the screen.
-    Each `pygame.Rect` object contains the position and size of a level button
-    :type level_buttons_rect: list[pygame.Rect]
+    Args:
+    all_button_instances: all_button_instances is a list that contains instances of
+    all the buttons in the game.
     """
     # Get the mouse position
     mouse_x, mouse_y = pygame.mouse.get_pos()
-    # Check if the mouse is over the button
-    is_hovering: bool = X_button_rect.collidepoint(mouse_x, mouse_y)
 
-    # Iterate over all the level buttons and check if the mouse is over any of the buttons
-    for button in range(len(level_buttons_rect)):
-        # Check if the mouse is over the button
-        if level_buttons_rect[button].collidepoint(mouse_x, mouse_y):
-            is_hovering = True
-    if is_hovering:
-        # Change cursor to pointing hand when hovering over a button
-        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
-    else:
-        # Change cursor to arrow when not hovering over a button
-        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
+    # Default the cursor to arrow cursor
+    cursor_type = pygame.SYSTEM_CURSOR_ARROW
+
+    # Iterate over all the buttons and check if the mouse is over any of them
+    for button in all_button_instances:
+        # Check if mouse is over the button and if the button is active
+        if button.collidepoint(mouse_x, mouse_y) and button.is_clickable():
+            # Change cursor to pointing hand when hovering over an active button
+            cursor_type = pygame.SYSTEM_CURSOR_HAND
+            break  # Exit the loop once we find a mouse is over a button
+
+    # Set the cursor
+    pygame.mouse.set_cursor(cursor_type)
 
 
 def exit_game(X_button_rect: pygame.Rect, event: pygame.event) -> bool:
     """
-    The function `exit_game` checks if the X button is clicked or if the mouse is hovering over the
-    X button and left mouse button is clicked, and returns a boolean value indicating whether
-    the game should continue playing or not.
+    The `exit_game` function checks if the X button or the ESC key is pressed to exit the game.
 
-    :param X_button_rect: The X_button_rect parameter is a pygame.Rect object that represents the
-    rectangular area of the X button in the game
-    :type X_button_rect: pygame.Rect
-    :param event: The `event` parameter is a pygame event object that represents a user action or
-    system event. It can be used to check for specific events such as mouse clicks or window close.
-    :type event: pygame.event
-    :return: a boolean value indicating whether the game is still playing or not. If the X button is
-    clicked or the pygame.QUIT event is triggered, the function returns False, indicating that the
-    game should exit. Otherwise, it returns True, indicating that the game should continue playing.
+    Args:
+    X_button_rect (pygame.Rect): The X_button_rect parameter is a pygame.Rect object that represents
+    the rectangular area of the X button in the game. It is used to check if the mouse is hovering
+    over the X button and if the X button is clicked.
+    event (pygame.event): The `event` parameter is an instance of the `pygame.event.Event` class. It
+    represents an event that has occurred in the game, such as a mouse click or a key press.
+
+    Returns:
+    a boolean value indicating whether the game should continue playing or not. If the game is
+    exited (either by clicking the X button, pressing the ESC key, or triggering the QUIT event),
+    the function returns False. Otherwise, it returns True to indicate that
+    the game should continue playing.
     """
+    # Get the position of the mouse
     mouse_x, mouse_y = pygame.mouse.get_pos()
+
     # Check if the mouse is over the button
     is_hovering: int = X_button_rect.collidepoint(mouse_x, mouse_y)
+
     # Get the state of the mouse buttons (left, middle, right)
     mouse_click: list[int] = pygame.mouse.get_pressed()
+
+    # QUIT event triggered when the user exits the app using Alt+F4 or the X button (windows button. not the in-game)
+    is_game_exited = event.type == pygame.QUIT
+
+    # Checks if the in-game X button was clicked
     # mouse_click[0] is the left mouse button
-    if event.type == pygame.QUIT or (is_hovering and mouse_click[0] == 1):
-        # the next 'while is_playing' loop would not execute
+    is_x_button_pressed = is_hovering and mouse_click[0] == 1
+
+    # Checks if the ESC key was pressed
+    is_esc_key_pressed = event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE
+
+    # If the game is exited, the next 'while is_playing' loop in project.py would not execute
+    if is_game_exited or is_x_button_pressed or is_esc_key_pressed:
         is_playing: bool = False
         return is_playing
     else:
