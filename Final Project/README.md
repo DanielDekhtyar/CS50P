@@ -17,9 +17,9 @@
 >
 > _Date format DD-MM-YYYY_
 
-### **[0.1.2] - 13-12-2023** (latest commit)
+### **[v0.1.2] - 13-12-2023** (commit a08d2e3)
 ---
-#### Added
+#### 🚀 Added
 - Button class created  
     - Depending on the current page, the button may be clickable or uncliackable using is_clickable() boolean.
     - All the buttons have to be images
@@ -39,7 +39,7 @@
     - When a button is created it is appended to the list.  
   it is done so you can access all the buttons in one place.
 - The game exits when pressing Alt+F4 or by pressing the in-game X button or the ESC button on the keyboard.
-#### Changed
+#### 🎨 Changed
 - Button creating process changed to take advantage of the Button class  
     - All the buttons are images saved in the /images/ folder.
     - Initially, you load the image and then give it as input to the Button class to create a button instance of that image.
@@ -50,16 +50,16 @@
   All you need to do is to ensure all the buttons are in the all_button_instances\[ \] list.
 - Method comments changed to a new format
 
-### **[0.1.1] - 10-12-2023** (commit 449a3ad)
+### **[v0.1.1] - 10-12-2023** (commit 449a3ad)
 ---
-#### Fixed
+#### 🛠️ Fixed
 - Type annotations added to project.py, game_loop.py, start_screen.py
 
 
-### **[0.1.0] - 06-12-2023** (commit 556477f)
+### **[v0.1.0] - 06-12-2023** (commit 556477f)
 ---
 
-#### Added
+#### 🚀 Added
 
 - Title added
 - X exit button added
