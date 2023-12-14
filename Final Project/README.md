@@ -11,11 +11,22 @@
 
 ## Changelog:
 
-> ### Last Version : 0.1.2
+> ### Last Version : 0.1.2.1
 >
-> ### Last Update : 13-12-2023
+> ### Last Update : 15-12-2023
 >
 > _Date format DD-MM-YYYY_
+
+### **[v0.1.2.1] - 15-12-2023 (latest commit)**
+--- 
+#### 🔥 Enhancements
+- All start screen rendering functionality moved to start_screen.py.   
+render_start_screen() is called from the main(), and the rest is done inside the file itself.
+- main() made more readable thanks to the enhancement described above.
+
+#### 🛠️ Fixed
+- Objects on the screen scale according to the device screen size and not a fixed number.
+
 
 ### **[v0.1.2] - 13-12-2023** (commit a08d2e3)
 ---
@@ -52,7 +63,7 @@
 
 ### **[v0.1.1] - 10-12-2023** (commit 449a3ad)
 ---
-#### 🛠️ Fixed
+#### 🔥 Enhancements
 - Type annotations added to project.py, game_loop.py, start_screen.py
 
 
