@@ -18,58 +18,28 @@ from src import start_screen, game_loop
 
 def main():
     """
-    This function initializes the Pygame module, sets up the game window, loads and displays the
-    background image, renders the title and buttons on the screen, and runs the game loop until the
-    player clicks the X button to exit the game.
+    The main function runs the Hangman game until the player chooses to exit.
+    It initializes pygame
+    Renders the initial start screen and runs and game loop
     """
     pygame.init()
+    
     # This is like a header in HTMl
     pygame.display.set_caption("Hangman (Daniel's CS50P Final Project)")
-    # Set screen size and alow the screen to be resizable
-    # (0, 0) means that the screen size will be set automatically
-    screen: pygame.Surface = pygame.display.set_mode(
-        (0, 0), pygame.RESIZABLE, pygame.FULLSCREEN
-    )
-    screen_width: int = screen.get_width()
-    screen_height: int = screen.get_height()
-
-    # Select the background image
-    bg_image_path: str = "CS50P/Final Project/images/background_image.png"
-    # Load the background image
-    bg_image: pygame.Surface = pygame.image.load(bg_image_path)
-    # Clean the screen. Make it completely white
-    screen.fill((255, 255, 255))
-    # Scale the background image to the size of the screen
-    bg_image: pygame.Surface = pygame.transform.scale(
-        bg_image, (screen_width, screen_height)
-    )
-    # Draw the background image.(0, 0) the image will render at the top left corner of the screen
-    screen.blit(bg_image, (0, 0))
-
-    # A list of all the buttons (Button class instances) in the game
-    all_button_instances = []
-
-    # Render the title "HANGMAN"
-    title_rect: pygame.Rect = start_screen.render_title(screen)
-
-    # Render the buttons "Level 1", "Level 2", "Level 3", "Level 4"
-    level_buttons_rect: pygame.Rect = start_screen.render_buttons(screen, title_rect)
-    # Add the newly created level buttons in to all_button_instances list
-    all_button_instances.extend(level_buttons_rect)
-
-    # Render the X button on the top right corner
-    X_button: pygame.Rect = start_screen.render_X_button(screen)
-    # Add the newly created exit button in to all_button_instances list
-    all_button_instances.append(X_button)
+    
+    # Render the start screen with the background image and the title and buttons
+    # Returns the buttons for later use in the game loop
+    all_button_instances, X_button = start_screen.render_start_screen()
 
     # Game runs until 'is_playing' is set to False. aka click the red X button
     is_playing: bool = True
 
-    # The Game loop. It will run until 'is_playing' is set to False. aka click the X button.
+    # The Game loop. It will run until 'is_playing' is set to False. aka exit the game
     while is_playing:
         for event in pygame.event.get():
             # Making pointing hand cursor when hovering over a button
             game_loop.mouse_when_over_button(all_button_instances)
+            
             # If the X button is clicked, the game will exit
             is_playing = game_loop.exit_game(X_button, event)
             if is_playing is False:
