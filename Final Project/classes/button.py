@@ -32,14 +32,15 @@
 import pygame
 
 class Button:
-    def __init__(self, img: pygame.Surface, img_width, img_hight):
+    def __init__(self, img: pygame.Surface, img_width, img_hight, button_name):
         # Render the text using the given font and font size
         self._img: pygame.Surface = pygame.transform.scale(img, (img_width, img_hight))
         # Create a rectangle for the button using the rendered text
         self._rect: pygame.Rect = self._img.get_rect()
         # Initially the button is clickable
         self._clickable: bool = True
-        self.hovering: bool = False
+        self._hovering: bool = False
+        self._button_name = button_name
 
     # This function draws the button on the screen
     def draw(self, screen: pygame.Surface):
@@ -55,8 +56,12 @@ class Button:
 
     def check_hovering(self, mouse_pos):
         # Check if the mouse is hovering over the button
-        self.hovering = self._rect.collidepoint(mouse_pos)
+        self._hovering = self._rect.collidepoint(mouse_pos)
 
+    @property
+    def name(self) -> str:
+        return self._button_name
+    
     @property
     def top(self):
         return self._rect.top

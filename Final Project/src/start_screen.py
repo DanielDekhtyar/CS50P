@@ -34,14 +34,18 @@ def render_start_screen() -> tuple[list[pygame.Rect], pygame.Rect]:
     all_button_instances.extend(level_buttons_rect)
 
     # Render the X button on the top right corner
-    X_button: pygame.Rect = render_X_button(screen)
+    exit_button: pygame.Rect = render_X_button(screen)
     # Add the newly created exit button in to all_button_instances list
-    all_button_instances.append(X_button)
+    all_button_instances.append(exit_button)
     
     # Returns the buttons for later use in the game loop
-    return all_button_instances, X_button
-    
-    
+    """
+    exit_button returned both in the all_button_instances list and in the exit_button variable because the
+    exit_button is used to detect when the button was clicked in the game loop.
+    """
+    return all_button_instances, exit_button
+
+
 def render_screen() -> pygame.Surface:
     """
     The `render_screen` function sets up the screen size, loads a background image, and renders it on
@@ -147,10 +151,10 @@ def render_buttons(screen: pygame.Surface, title_rect: pygame.Rect) -> tuple[But
     image_width, image_height = int(screen.get_width() * 0.25), int(screen.get_height() * 0.25)
 
     # Instantiate the buttons as Button class instances
-    level_1_button = Button(level_1_img, image_width, image_height)
-    level_2_button = Button(level_2_img, image_width, image_height)
-    level_3_button = Button(level_3_img, image_width, image_height)
-    level_4_button = Button(level_4_img, image_width, image_height)
+    level_1_button = Button(level_1_img, image_width, image_height, "Level 1")
+    level_2_button = Button(level_2_img, image_width, image_height, "Level 2")
+    level_3_button = Button(level_3_img, image_width, image_height, "Level 3")
+    level_4_button = Button(level_4_img, image_width, image_height, "Level 4")
 
     # Calculate the horizontal center of the screen
     center_x: int = screen.get_rect().centerx
@@ -205,8 +209,10 @@ def render_X_button(screen: pygame.Surface) -> pygame.Rect:
     image_folder_path: int = "CS50P/Final Project/images/"
     image: pygame.Surface = pygame.image.load(f"{image_folder_path}exit button.png")
 
+    button_width = int(screen.get_width() * 0.03)
+    button_height = int(screen.get_height() * 0.055)
     # Create an instance of the exit (big X) button as a Button class instance
-    button = Button(image, int(screen.get_width() * 0.03), int(screen.get_height() * 0.055))
+    button = Button(image, button_width, button_height, "Exit")
 
     # Set the X position of the exit button.
     margin_from_right_side = int(screen.get_width() * 0.02)

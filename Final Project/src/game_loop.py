@@ -6,7 +6,7 @@ import pygame
 
 
 # Making pointing hand cursor when hovering over a button
-def mouse_when_over_button(all_button_instances):
+def mouse_when_over_button(all_button_instances, mouse_pos: tuple[int, int]):
     """
     The function `mouse_when_over_button` checks if the mouse is over any active button
     and changes the cursor type accordingly.
@@ -16,7 +16,7 @@ def mouse_when_over_button(all_button_instances):
     all the buttons in the game.
     """
     # Get the mouse position
-    mouse_x, mouse_y = pygame.mouse.get_pos()
+    mouse_x, mouse_y = mouse_pos
 
     # Default the cursor to arrow cursor
     cursor_type = pygame.SYSTEM_CURSOR_ARROW
@@ -25,6 +25,7 @@ def mouse_when_over_button(all_button_instances):
     for button in all_button_instances:
         # Check if mouse is over the button and if the button is active
         if button.collidepoint(mouse_x, mouse_y) and button.is_clickable():
+            print(button)
             # Change cursor to pointing hand when hovering over an active button
             cursor_type = pygame.SYSTEM_CURSOR_HAND
             break  # Exit the loop once we find a mouse is over a button
@@ -33,7 +34,7 @@ def mouse_when_over_button(all_button_instances):
     pygame.mouse.set_cursor(cursor_type)
 
 
-def exit_game(X_button_rect: pygame.Rect, event: pygame.event) -> bool:
+def exit_game(X_button_rect: pygame.Rect, event: pygame.event, mouse_pos: tuple[int, int]) -> bool:
     """
     The `exit_game` function checks if the X button or the ESC key is pressed to exit the game.
 
@@ -51,7 +52,7 @@ def exit_game(X_button_rect: pygame.Rect, event: pygame.event) -> bool:
     the game should continue playing.
     """
     # Get the position of the mouse
-    mouse_x, mouse_y = pygame.mouse.get_pos()
+    mouse_x, mouse_y = mouse_pos
 
     # Check if the mouse is over the button
     is_hovering: int = X_button_rect.collidepoint(mouse_x, mouse_y)
