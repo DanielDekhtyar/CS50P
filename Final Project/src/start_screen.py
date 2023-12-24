@@ -9,11 +9,12 @@ import pygame
 from font import set_font
 from classes.button import Button
 
+
 def render_start_screen() -> tuple[list[pygame.Rect], pygame.Rect]:
     """
     The function `render_start_screen` renders the start screen of a game, including the title, level
     buttons, and exit button, and returns the button instances for later use in the game loop.
-    
+
     Returns:
     a tuple containing two elements. The first element is a list of pygame.Rect objects representing
     the level buttons in the game. The second element is a pygame.Rect object representing the X button on the
@@ -24,7 +25,7 @@ def render_start_screen() -> tuple[list[pygame.Rect], pygame.Rect]:
 
     # Render the screen and the background image
     screen = render_screen()
-    
+
     # Render the title "Hangman"
     title_rect: pygame.Rect = render_title(screen)
 
@@ -34,10 +35,10 @@ def render_start_screen() -> tuple[list[pygame.Rect], pygame.Rect]:
     all_button_instances.extend(level_buttons_rect)
 
     # Render the X button on the top right corner
-    exit_button: pygame.Rect = render_X_button(screen)
+    exit_button: pygame.Rect = render_exit_button(screen)
     # Add the newly created exit button in to all_button_instances list
     all_button_instances.append(exit_button)
-    
+
     # Returns the buttons for later use in the game loop
     """
     exit_button returned both in the all_button_instances list and in the exit_button variable because the
@@ -50,33 +51,35 @@ def render_screen() -> pygame.Surface:
     """
     The `render_screen` function sets up the screen size, loads a background image, and renders it on
     the screen.
-    
+
     Returns:
     a pygame.Surface object, which represents the screen that has been rendered.
     """
-    
+
     # Set screen size and alow the screen to be resizable
     # (0, 0) means that the screen size will be set automatically
     screen: pygame.Surface = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
-    
-    # Get the screen width and height to be letter set to the background image 
+
+    # Get the screen width and height to be letter set to the background image
     screen_width, screen_height = screen.get_width(), screen.get_height()
 
     # Select the background image
     bg_image_path: str = "CS50P/Final Project/images/background_image.png"
-    
+
     # Load the background image
     bg_image: pygame.Surface = pygame.image.load(bg_image_path)
-    
+
     # Clean the screen. Make it completely white
     screen.fill((255, 255, 255))
-    
+
     # Scale the background image to the size of the screen
-    bg_image: pygame.Surface = pygame.transform.scale(bg_image, (screen_width, screen_height))
-    
+    bg_image: pygame.Surface = pygame.transform.scale(
+        bg_image, (screen_width, screen_height)
+    )
+
     # Draw the background image.(0, 0) the image will render at the top left corner of the screen
     screen.blit(bg_image, (0, 0))
-    
+
     return screen
 
 
@@ -84,42 +87,42 @@ def render_title(screen: pygame) -> pygame.Rect:
     """
     The function `render_title` renders the title "Hangman" on the screen and returns the rectangle
     object representing the position of the rendered text.
-    
+
     Args:
     screen (pygame): The `screen` parameter is a pygame surface object that represents the screen or
     window on which the title will be rendered.
-    
+
     Returns:
     a pygame.Rect object that represents the position and size of the rendered title text on the
     screen.
     """
     # Set the percentage of the screen that the title will occupy
     title_font_percentage = 0.13
-    
+
     # Set the font size of the title according to the percentage of the screen
     title_font_size = int(screen.get_height() * title_font_percentage)
-    
+
     # Choose the font of the title
     title_font = pygame.font.Font(set_font.title_font(), title_font_size)
-    
+
     # Title text
     title_text: str = "Hangman"
-    
+
     # Render the text
     title_render = title_font.render(title_text, True, (0, 0, 0))
-    
+
     # Get the rect of the rendered text
     title_rect: pygame.Rect = title_render.get_rect()
-    
+
     # Position the text at the top center of the screen
     title_rect.centerx = screen.get_rect().centerx
-    
+
     # Adjust this value to set the vertical position
     title_rect.y = int(screen.get_height() * 0.05)
-    
+
     # Draw the text
     screen.blit(title_render, title_rect)
-    
+
     # Return the rect object for reference
     return title_rect
 
@@ -128,14 +131,14 @@ def render_buttons(screen: pygame.Surface, title_rect: pygame.Rect) -> tuple[But
     """
     The `render_buttons` function loads and sizes level button images, instantiates button objects, sets
     their positions, draws them on the screen, and returns the button objects.
-    
+
     Args:
     screen (pygame.Surface): The `screen` parameter is a `pygame.Surface` object representing the game
     window or screen on which the buttons will be rendered.
     title_rect (pygame.Rect): The `title_rect` parameter is a `pygame.Rect` object that represents the
     rectangle area where the title of the screen is displayed. It is used to calculate the position of
     the buttons relative to the title.
-    
+
     Returns:
     The function `render_buttons` returns a tuple containing the four `Button` objects:
     `level_1_button`, `level_2_button`, `level_3_button`, and `level_4_button`.
@@ -148,7 +151,9 @@ def render_buttons(screen: pygame.Surface, title_rect: pygame.Rect) -> tuple[But
     level_4_img: pygame.Surface = pygame.image.load(f"{image_folder_path}level 4.png")
 
     # Size the images
-    image_width, image_height = int(screen.get_width() * 0.25), int(screen.get_height() * 0.25)
+    image_width, image_height = int(screen.get_width() * 0.25), int(
+        screen.get_height() * 0.25
+    )
 
     # Instantiate the buttons as Button class instances
     level_1_button = Button(level_1_img, image_width, image_height, "Level 1")
@@ -160,7 +165,7 @@ def render_buttons(screen: pygame.Surface, title_rect: pygame.Rect) -> tuple[But
     center_x: int = screen.get_rect().centerx
 
     # Set the margin between the title and the buttons, and between each button
-    image_margin:int = int(screen.get_width() * 0.05)
+    image_margin: int = int(screen.get_width() * 0.05)
 
     """
     Set the buttons' position
@@ -170,14 +175,14 @@ def render_buttons(screen: pygame.Surface, title_rect: pygame.Rect) -> tuple[But
     plus the margin between them, and using floor division to find the center position.
     """
     # Formula explained above
-    level_1_button.x = (center_x - (2 * image_width + image_margin) // 2)
+    level_1_button.x = center_x - (2 * image_width + image_margin) // 2
     level_1_button.y = title_rect.bottom + image_margin
-    
+
     level_2_button.x = level_1_button.right + image_margin
     level_2_button.y = title_rect.bottom + image_margin
 
     # Formula explained above
-    level_3_button.x = (center_x - (2 * image_width + image_margin) // 2)
+    level_3_button.x = center_x - (2 * image_width + image_margin) // 2
     level_3_button.y = level_2_button.bottom + image_margin
 
     level_4_button.x = level_3_button.right + image_margin
@@ -193,15 +198,15 @@ def render_buttons(screen: pygame.Surface, title_rect: pygame.Rect) -> tuple[But
     return level_1_button, level_2_button, level_3_button, level_4_button
 
 
-def render_X_button(screen: pygame.Surface) -> pygame.Rect:
+def render_exit_button(screen: pygame.Surface) -> pygame.Rect:
     """
     The function `render_X_button` renders an exit button on the screen using an image and returns the
     rectangle of the button for later use.
-    
+
     Args:
     screen (pygame.Surface): The `screen` parameter is a `pygame.Surface` object representing the
     surface on which the button will be rendered.
-    
+
     Returns:
     the `rect` attribute of the `button` object.
     """
@@ -215,12 +220,13 @@ def render_X_button(screen: pygame.Surface) -> pygame.Rect:
     button = Button(image, button_width, button_height, "Exit")
 
     # Set the X position of the exit button.
-    margin_from_right_side = int(screen.get_width() * 0.02)
+    margin_from_right_side = int(screen.get_width() * 0.045)
+
     # It calculates the position from the right side, leaving a specified margin
     button.x: int = screen.get_width() - button.width - margin_from_right_side
 
     # Set the Y position of the exit button
-    button.y: int = int(screen.get_height() * 0.02)
+    button.y: int = int(screen.get_height() * 0.03)
 
     # Draw the button on the screen
     button.draw(screen)

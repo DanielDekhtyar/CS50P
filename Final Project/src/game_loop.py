@@ -4,6 +4,10 @@ game_loop.py contains the functions for the main game loop of the game.
 
 import pygame
 
+import project
+from src import game_screen
+from src import hangman_game
+
 
 # Making pointing hand cursor when hovering over a button
 def mouse_when_over_button(all_button_instances, mouse_pos: tuple[int, int]):
@@ -24,8 +28,7 @@ def mouse_when_over_button(all_button_instances, mouse_pos: tuple[int, int]):
     # Iterate over all the buttons and check if the mouse is over any of them
     for button in all_button_instances:
         # Check if mouse is over the button and if the button is active
-        if button.collidepoint(mouse_x, mouse_y) and button.is_clickable():
-            print(button)
+        if button.collidepoint(mouse_x, mouse_y) and button.clickable:
             # Change cursor to pointing hand when hovering over an active button
             cursor_type = pygame.SYSTEM_CURSOR_HAND
             break  # Exit the loop once we find a mouse is over a button
@@ -34,7 +37,9 @@ def mouse_when_over_button(all_button_instances, mouse_pos: tuple[int, int]):
     pygame.mouse.set_cursor(cursor_type)
 
 
-def exit_game(X_button_rect: pygame.Rect, event: pygame.event, mouse_pos: tuple[int, int]) -> bool:
+def exit_game(
+    X_button_rect: pygame.Rect, event: pygame.event, mouse_pos: tuple[int, int]
+) -> bool:
     """
     The `exit_game` function checks if the X button or the ESC key is pressed to exit the game.
 
@@ -57,23 +62,19 @@ def exit_game(X_button_rect: pygame.Rect, event: pygame.event, mouse_pos: tuple[
     # Check if the mouse is over the button
     is_hovering: int = X_button_rect.collidepoint(mouse_x, mouse_y)
 
-    # Get the state of the mouse buttons (left, middle, right)
-    mouse_click: list[int] = pygame.mouse.get_pressed()
-
     # QUIT event triggered when the user exits the app using Alt+F4 or the X button (windows button. not the in-game)
     is_game_exited = event.type == pygame.QUIT
 
     # Checks if the in-game X button was clicked
-    # mouse_click[0] is the left mouse button
-    is_x_button_pressed = is_hovering and mouse_click[0] == 1
+    is_x_button_pressed = (
+        event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and is_hovering
+    )
 
     # Checks if the ESC key was pressed
-    is_esc_key_pressed = event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE
+    is_esc_key_pressed = event.type == pygame.KEYUP and event.key == pygame.K_ESCAPE
 
     # If the game is exited, the next 'while is_playing' loop in project.py would not execute
     if is_game_exited or is_x_button_pressed or is_esc_key_pressed:
-        is_playing: bool = False
-        return is_playing
+        return False
     else:
-        is_playing = True
-        return is_playing
+        return True

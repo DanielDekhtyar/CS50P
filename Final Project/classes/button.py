@@ -31,6 +31,7 @@
 
 import pygame
 
+
 class Button:
     def __init__(self, img: pygame.Surface, img_width, img_hight, button_name):
         # Render the text using the given font and font size
@@ -47,21 +48,22 @@ class Button:
         screen.blit(self._img, self._rect)  # Draw the rendered text onto the screen
         pygame.display.flip()
 
-    # Returns if the button is clickable
-    def is_clickable(self) -> bool:
-        if self._clickable:
-            return True
-        else:
-            return False
-
     def check_hovering(self, mouse_pos):
         # Check if the mouse is hovering over the button
         self._hovering = self._rect.collidepoint(mouse_pos)
 
     @property
+    def clickable(self) -> bool:
+        return self._clickable
+
+    @clickable.setter
+    def clickable(self, value: bool):
+        self._clickable = value
+
+    @property
     def name(self) -> str:
         return self._button_name
-    
+
     @property
     def top(self):
         return self._rect.top
@@ -136,11 +138,11 @@ class Button:
     @width.setter
     def width(self, width: int):
         self._rect.width = width
-    
+
     @property
     def hight(self) -> int:
         return self._rect.hight
-    
+
     @hight.setter
     def hight(self, hight: int):
         self._rect.hight = hight
