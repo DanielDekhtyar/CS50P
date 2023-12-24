@@ -15,9 +15,5 @@ def topic_font():
     return get_font.font("Architex.ttf")
 
 
-def exit_button_font():
-    return get_font.font("Crosshatcher D.otf")
-
-
-def level_button_font():
+def masked_word_font():
     return get_font.font("Light And Airy.ttf")
