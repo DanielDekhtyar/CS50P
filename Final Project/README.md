@@ -34,7 +34,7 @@
   - `mouse_click = pygame.mouse.get_pressed()` is out of the for loop, otherwise it would be called every time the loop iterates.
 
 
-### 🗓️ *Version 0.2.0 - 24-12-2023  (ee4ce10)*
+### 🗓️ *Version 0.2.0 - 24-12-2023  (commit ee4ce10)*
 ---
 #### 🚀 Added
 - Game screen added in `game_screen.py`
@@ -64,7 +64,7 @@
 - button instance clickability now can be changed using getters and setters `my_button.clickable`.  
 - `is_clickable` property deleted as it is no longer needed thanks to the new `clickable` attribute.
 
-### 🗓️ *Version 0.1.2.1 - 15-12-2023 (99ad8ab)*
+### 🗓️ *Version 0.1.2.1 - 15-12-2023 (commit 99ad8ab)*
 --- 
 #### 🔥 Enhancements
 - All start screen rendering functionality moved to `start_screen.py`.   
