@@ -12,17 +12,36 @@ from PIL import Image, ImageEnhance
 from classes.word import Word
 from src import hangman_game
 from src import game_screen
+from src import game_loop
 from font import set_font
 import project
 
 
-def game_logic(level, mouse_pos, all_button_instances):
+def game_logic(level, all_button_instances):
     change_main_screen_button_clickability(all_button_instances)
+
     # Create the word class
     word_cls = get_word_cls(level)
-    screen, alphabet_buttons = game_screen.render_game_screen(
+    screen, alphabet_buttons, exit_button = game_screen.render_game_screen(
         word_cls, all_button_instances
     )
+
+    # Game screen Game Loop:
+    is_playing = True
+    # The Game loop. It will run until 'is_playing' is set to False, aka exit the game
+    while is_playing:
+        mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
+
+        for event in pygame.event.get():
+            # Check if the game should exit
+            is_playing = game_loop.exit_game(exit_button, event, mouse_pos)
+
+            # If mouse hovers, it will change the cursor to a pointing hand
+            game_loop.mouse_when_over_button(all_button_instances, mouse_pos)
+
+        # Update the screen once after processing events
+        pygame.display.update()
+    return is_playing
 
 
 def change_main_screen_button_clickability(

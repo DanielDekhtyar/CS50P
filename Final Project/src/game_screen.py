@@ -30,7 +30,7 @@ def render_game_screen(word_cls, all_button_instances) -> None:
 
     alphabet_buttons = render_alphabet_buttons(screen, all_button_instances)
 
-    return screen, alphabet_buttons
+    return screen, alphabet_buttons, exit_button
 
 
 def render_topic_text(topic: str, screen: pygame.Surface) -> pygame.Rect:

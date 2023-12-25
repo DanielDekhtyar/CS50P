@@ -36,54 +36,51 @@ def main():
     # HACK: make it return just the button list without the exit button separately using return_button_clicked
     all_button_instances, exit_button = start_screen.render_start_screen()
 
-    # Game runs until 'is_playing' is set to False. aka click the red X button
+    # The Game loop. It will run until 'is_playing' is set to False. aka exit the game
     is_playing: bool = True
 
-    # The Game loop. It will run until 'is_playing' is set to False. aka exit the game
+    # The main game loop
     while is_playing:
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
 
         for event in pygame.event.get():
-            """
-            Mouse position determined at the start of the game loop to save computer resources.
-            Otherwise the pygame.mouse.get_pos() function would be called in every function.
-            """
+            # Mouse position determined at the start of the game loop to save computer resources.
+            # Otherwise, the pygame.mouse.get_pos() function would be called in every function.
 
             # Making pointing hand cursor when hovering over a button
             game_loop.mouse_when_over_button(all_button_instances, mouse_pos)
 
-            # Get the name of the button that was clicked, if any was clicked
+            # Get the name of the button that was clicked. If no button clicked, it gets None
             button_name = button_clicked(all_button_instances, mouse_pos)
 
             # Create a set of all the names of the level buttons
             level_names = {"Level 1", "Level 2", "Level 3", "Level 4"}
 
-            # If the name of the button is in the set of level names, the game will start the level.
+            """
+            If one of the level buttons is clicked, the game will start the level.
+            When the exit button on the game screen is clicked, game_logic will return False,
+            The game loop will stop and the game will exit
+            
+            The If Else statement is written in the way that it does because otherwise
+            you need to click the exit button twice to exit the game.
+            One time to exit the game_logic loop and the second time to exit the main game loop.
+            """
+            # For explanation of the IF statement read the docstring above ^^^^^
             if button_name in level_names:
-                hangman_game.game_logic(button_name, mouse_pos, all_button_instances)
-                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                    # Check if any button was clicked
-                    mouse_pos = pygame.mouse.get_pos()
-                    for button in all_button_instances:
-                        if button.get_rect().collidepoint(mouse_pos):
-                            # Button clicked, print its name
-                            print(f"Button clicked: {button.name}")
-
-            # If the X button is clicked, the game will exit
-            is_playing = game_loop.exit_game(exit_button, event, mouse_pos)
-            if is_playing is False:
-                break
+                is_playing = hangman_game.game_logic(button_name, all_button_instances)
+            else:
+                # If the X button is clicked, the game will exit
+                is_playing = game_loop.exit_game(exit_button, event, mouse_pos)
 
         # Updating the screen each time we change something
         pygame.display.update()
 
+    # Outside the loop, when the game is supposed to end
     print("Thank you for playing Hangman!")
-
     pygame.quit()
-    return
 
 
-def button_clicked(all_button_instances: list[pygame.Rect], mouse_pos) -> int:
+def button_clicked(all_button_instances: list[pygame.Rect], mouse_pos) -> str:
     """
     The function `button_clicked` checks if a button was clicked and returns the name of
     the button, otherwise it returns None.
@@ -98,18 +95,19 @@ def button_clicked(all_button_instances: list[pygame.Rect], mouse_pos) -> int:
     Returns:
     the name of the button that was clicked, as an integer. If no button is clicked, it returns None.
     """
-    # Get the position of the mouse
-    mouse_x, mouse_y = mouse_pos
+    # Filter out non-clickable buttons before the loop
+    clickable_buttons = [button for button in all_button_instances if button.clickable]
 
-    # Iterate over all the buttons and check if the mouse is over any of them
-    for button in all_button_instances:
-        # Check if mouse is over the button and if the button is active
-        if button.collidepoint(mouse_x, mouse_y) and button.clickable:
-            # Get the list of all mouse button pressed.
-            # [0] is the left mouse button, [1] is the middle mouse button, [2] is the right mouse button.
-            mouse_click: list[int] = pygame.mouse.get_pressed()
+    # Get the list of all mouse button pressed.
+    # [0] is the left mouse button, [1] is the middle mouse button, [2] is the right mouse button.
+    mouse_click: list[int] = pygame.mouse.get_pressed()
+            
+    # Iterate over clickable buttons and check if the mouse is over any of them
+    for button in clickable_buttons:
+        if button.collidepoint(mouse_pos):
             if mouse_click[0] == 1:
                 return button.name
+
     # If no button is clicked, return None
     else:
         return None
