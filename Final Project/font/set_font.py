@@ -16,4 +16,4 @@ def topic_font():
 
 
 def masked_word_font():
-    return get_font.font("Light And Airy.ttf")
+    return get_font.font("phitradesign Handwritten Thin.ttf")
