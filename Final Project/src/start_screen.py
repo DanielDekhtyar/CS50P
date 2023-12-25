@@ -10,7 +10,7 @@ from font import set_font
 from classes.button import Button
 
 
-def render_start_screen() -> tuple[list[pygame.Rect], pygame.Rect]:
+def render_start_screen(screen) -> tuple[list[pygame.Rect], pygame.Rect]:
     """
     The function `render_start_screen` renders the start screen of a game, including the title, level
     buttons, and exit button, and returns the button instances for later use in the game loop.
@@ -24,7 +24,7 @@ def render_start_screen() -> tuple[list[pygame.Rect], pygame.Rect]:
     all_button_instances = []
 
     # Render the screen and the background image
-    screen = render_screen()
+    render_bg(screen)
 
     # Render the title "Hangman"
     title_rect: pygame.Rect = render_title(screen)
@@ -47,7 +47,7 @@ def render_start_screen() -> tuple[list[pygame.Rect], pygame.Rect]:
     return all_button_instances, exit_button
 
 
-def render_screen() -> pygame.Surface:
+def render_bg(screen) -> pygame.Surface:
     """
     The `render_screen` function sets up the screen size, loads a background image, and renders it on
     the screen.
@@ -56,9 +56,8 @@ def render_screen() -> pygame.Surface:
     a pygame.Surface object, which represents the screen that has been rendered.
     """
 
-    # Set screen size and alow the screen to be resizable
-    # (0, 0) means that the screen size will be set automatically
-    screen: pygame.Surface = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
+    # Clean the screen. Make it completely white
+    screen.fill((255, 255, 255))
 
     # Get the screen width and height to be letter set to the background image
     screen_width, screen_height = screen.get_width(), screen.get_height()
@@ -68,9 +67,6 @@ def render_screen() -> pygame.Surface:
 
     # Load the background image
     bg_image: pygame.Surface = pygame.image.load(bg_image_path)
-
-    # Clean the screen. Make it completely white
-    screen.fill((255, 255, 255))
 
     # Scale the background image to the size of the screen
     bg_image: pygame.Surface = pygame.transform.scale(

@@ -9,28 +9,28 @@ import string
 
 from src import start_screen
 from classes.word import Word
-from src import hangman_game
-from font import set_font
 from classes.button import Button
+from font import set_font
 
 
-def render_game_screen(word_cls, all_button_instances) -> None:
+def render_game_screen(word_cls, all_button_instances, screen) -> None:
     # Reuse the code from start_screen.py as the background screen is the same
     # Render the screen surface
-    screen = start_screen.render_screen()
+    start_screen.render_bg(screen)
 
     # Render the X exit button at the top right side of the screen
     exit_button = start_screen.render_exit_button(screen)
 
     # Renders the Topic : <topic> text
-    topic_text = render_topic_text(word_cls.topic, screen)
+    render_topic_text(word_cls.topic, screen)
 
     # Rended the masked word in the middle of the screen
-    masked_word = render_masked_word(word_cls, screen)
+    render_masked_word(word_cls, screen)
 
-    alphabet_buttons = render_alphabet_buttons(screen, all_button_instances)
+    # Render the alphabet buttons
+    render_alphabet_buttons(screen, all_button_instances)
 
-    return screen, alphabet_buttons, exit_button
+    return exit_button
 
 
 def render_topic_text(topic: str, screen: pygame.Surface) -> pygame.Rect:
@@ -61,15 +61,12 @@ def render_topic_text(topic: str, screen: pygame.Surface) -> pygame.Rect:
     # Draw the text
     screen.blit(render, rect)
 
-    # Return the rect object for reference
-    return rect
-
 
 def render_masked_word(word: Word, screen: pygame.Surface) -> pygame.Rect:
     # Get the masked word. i.e HANGMAN will be for example HAN_M_N
     masked_word = word.get_masked_word()
     # Set the percentage of the screen that the text will occupy
-    font_percentage = 0.25
+    font_percentage = 0.1
 
     # Set the font size of the text according to the percentage of the screen
     font_size = int(screen.get_height() * font_percentage)
@@ -82,7 +79,6 @@ def render_masked_word(word: Word, screen: pygame.Surface) -> pygame.Rect:
 
     # Render the text
     render = font.render(text, True, (0, 0, 0))
-
     # Get the rect of the rendered text
     rect: pygame.Rect = render.get_rect()
 
@@ -94,9 +90,6 @@ def render_masked_word(word: Word, screen: pygame.Surface) -> pygame.Rect:
 
     # Draw the text
     screen.blit(render, rect)
-
-    # Return the rect object for reference
-    return rect
 
 
 def render_alphabet_buttons(
@@ -113,17 +106,26 @@ def render_alphabet_buttons(
     def render_letter_buttons(
         screen: pygame.Surface, letter_images: dict[str, pygame.Surface]
     ) -> tuple[Button]:
+        # The dimensions of the buttons
         button_width, button_height = 81, 93
+        
+        # The margin between buttons
         button_margin_x, button_margin_y = 10, 10
+        
+        # 26 letters in the alphabet / 2 rows = 13 letters per row
         max_buttons_per_row = 13
 
+        # Total number of buttons to be displayed
         total_buttons = len(letter_images)
         rows = (total_buttons + max_buttons_per_row - 1) // max_buttons_per_row
 
+        # The X position of the first button (A)
         start_x = (
             screen.get_width()
             - (max_buttons_per_row * (button_width + button_margin_x) - button_margin_x)
         ) // 2
+        
+        # The Y position of the first button (A)
         start_y = (
             (
                 screen.get_height()
@@ -132,7 +134,8 @@ def render_alphabet_buttons(
             // 2
         ) + screen.get_height() * 0.35
 
-        buttons = []
+        # Counts how many buttons was created
+        buttons_count = 0
 
         # Iterate through each letter and its corresponding image
         for letter, image in letter_images.items():
@@ -146,12 +149,12 @@ def render_alphabet_buttons(
 
             # Append the button instance to the list
             all_button_instances.append(letter_button)
-            buttons.append(letter_button)
+            buttons_count += 1
 
             start_x += button_width + button_margin_x
 
             # Move to the next row if the maximum buttons per row is reached
-            if len(buttons) % max_buttons_per_row == 0:
+            if buttons_count % max_buttons_per_row == 0:
                 start_x = (
                     screen.get_width()
                     - (
@@ -161,9 +164,5 @@ def render_alphabet_buttons(
                 ) // 2
                 start_y += button_height + button_margin_y
 
-        return tuple(buttons)
-
     # Render the letter buttons
-    buttons = render_letter_buttons(screen, letter_images)
-
-    return buttons
+    render_letter_buttons(screen, letter_images)

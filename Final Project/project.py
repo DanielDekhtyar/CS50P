@@ -31,30 +31,35 @@ def main():
     # This is like a header in HTMl
     pygame.display.set_caption("Hangman (Daniel's CS50P Final Project)")
 
+    # Set screen size and alow the screen to be resizable
+    # (0, 0) means that the screen size will be set automatically
+    screen: pygame.Surface = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
+    
     # Render the start screen with the background image and the title and buttons
     # Returns the buttons for later use in the game loop
     # HACK: make it return just the button list without the exit button separately using return_button_clicked
-    all_button_instances, exit_button = start_screen.render_start_screen()
+    all_button_instances, exit_button = start_screen.render_start_screen(
+        screen)
 
     # The Game loop. It will run until 'is_playing' is set to False. aka exit the game
     is_playing: bool = True
 
     # The main game loop
     while is_playing:
+        # Mouse position determined at the start of the game loop to save computer resources.
+        # Otherwise, the pygame.mouse.get_pos() function would be called in every function.
         mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
+        
+        # Making pointing hand cursor when hovering over a button
+        game_loop.mouse_when_over_button(all_button_instances, mouse_pos)
+
+        # Get the name of the button that was clicked. If no button clicked, it gets None
+        button_name = button_clicked(all_button_instances, mouse_pos)
+        
+        # Create a set of all the names of the level buttons
+        level_names = {"Level 1", "Level 2", "Level 3", "Level 4"}
 
         for event in pygame.event.get():
-            # Mouse position determined at the start of the game loop to save computer resources.
-            # Otherwise, the pygame.mouse.get_pos() function would be called in every function.
-
-            # Making pointing hand cursor when hovering over a button
-            game_loop.mouse_when_over_button(all_button_instances, mouse_pos)
-
-            # Get the name of the button that was clicked. If no button clicked, it gets None
-            button_name = button_clicked(all_button_instances, mouse_pos)
-
-            # Create a set of all the names of the level buttons
-            level_names = {"Level 1", "Level 2", "Level 3", "Level 4"}
 
             """
             If one of the level buttons is clicked, the game will start the level.
@@ -67,7 +72,9 @@ def main():
             """
             # For explanation of the IF statement read the docstring above ^^^^^
             if button_name in level_names:
-                is_playing = hangman_game.game_logic(button_name, all_button_instances)
+                is_playing = hangman_game.game_logic(
+                    screen, button_name, all_button_instances
+                )
             else:
                 # If the X button is clicked, the game will exit
                 is_playing = game_loop.exit_game(exit_button, event, mouse_pos)
@@ -101,7 +108,7 @@ def button_clicked(all_button_instances: list[pygame.Rect], mouse_pos) -> str:
     # Get the list of all mouse button pressed.
     # [0] is the left mouse button, [1] is the middle mouse button, [2] is the right mouse button.
     mouse_click: list[int] = pygame.mouse.get_pressed()
-            
+
     # Iterate over clickable buttons and check if the mouse is over any of them
     for button in clickable_buttons:
         if button.collidepoint(mouse_pos):
