@@ -11,13 +11,30 @@
 
 ## 📝 Changelog:
 
-> ### Last Version : 0.2.0
+> ### Last Version : 0.2.5
 >
 > ### Last Update : 24-12-2023
 >
 > _Date format DD-MM-YYYY_
 
-### **🗓️ Version 0.2.0 - 24-12-2023  (latest commit)**
+### 🗓️ *Version 0.2.5 - 25-12-2023  (latest commit)*
+---
+#### 🚀 Added
+- The game loop of the game screen is now working as it should.
+- The loop is located in `hangman_game.py` in the `game_logic` function.
+- The main game loop inside `main` in `project.py` changed to work with the new game screen game loop.
+- `render_game_screen` in `game_screen.py` now also returns the exit button (`Button` class) to be later used int the `game_logic` inside `hangman_game.py`.
+
+#### 🔥 Enhancements
+- `button_clicked` function in `project.py` was refactored to be more efficient
+  - Filter out non-clickable buttons before the loop.  
+  Iterates just over the clickable buttons using `clickable_buttons[]` list
+  - Type annotation changed to -> str.  
+  It was mistakenly set to -> int.
+  - `mouse_click = pygame.mouse.get_pressed()` is out of the for loop, otherwise it would be called every time the loop iterates.
+
+
+### 🗓️ *Version 0.2.0 - 24-12-2023  (ee4ce10)*
 ---
 #### 🚀 Added
 - Game screen added in `game_screen.py`
@@ -36,7 +53,7 @@
   As its name implies, it returns the masked word str based on the values of `guessed_letter_index`.
 - `button_clicked()` implemented inside `project.py`.  
   The function returns the `button.name` of the button that was clicked.
-- `game loop` updated to include the game screen
+- game loop updated to include the game screen
 - `hangman_game.py` added to include the game logic
 
 #### 🔥 Enhancements
@@ -47,7 +64,7 @@
 - button instance clickability now can be changed using getters and setters `my_button.clickable`.  
 - `is_clickable` property deleted as it is no longer needed thanks to the new `clickable` attribute.
 
-### **🗓️ Version 0.1.2.1 - 15-12-2023 (99ad8ab)**
+### 🗓️ *Version 0.1.2.1 - 15-12-2023 (99ad8ab)*
 --- 
 #### 🔥 Enhancements
 - All start screen rendering functionality moved to `start_screen.py`.   
@@ -58,7 +75,7 @@
 - Objects on the screen scale according to the device screen size and not a fixed number.
 
 
-## **🗓️ Version 0.1.2 - 13-12-2023** (commit a08d2e3)
+### 🗓️ *Version 0.1.2 - 13-12-2023 (commit a08d2e3)*
 ---
 #### 🚀 Added
 - Button class created  
@@ -91,13 +108,13 @@
   All you need to do is to ensure all the buttons are in the `all_button_instances[]` list.
 - Method comments changed to a new format
 
-### **🗓️ Version 0.1.1 - 10-12-2023** (commit 449a3ad)
+### 🗓️ *Version 0.1.1 - 10-12-2023 (commit 449a3ad)*
 ---
 #### 🔥 Enhancements
 - Type annotations added to `project.py`, `game_loop.py`, `start_screen.py`
 
 
-### **🗓️ Version 0.1.0 - 06-12-2023** (commit 556477f)
+### 🗓️ *Version 0.1.0 - 06-12-2023 (commit 556477f)*
 ---
 
 #### 🚀 Added
