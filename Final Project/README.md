@@ -16,7 +16,7 @@
 >
 > ### Last Update : 25-12-2023
 >
-> _Date format DD-MM-YYYY_\
+> _Date format DD-MM-YYYY_
 
 ### 🗓️ _Version 0.9.0 - 25-12-2023 (latest commit)_
 
