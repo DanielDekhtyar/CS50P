@@ -7,6 +7,7 @@
     - img_height (int): The height of the button image.
     - _rect (pygame.Rect): The rectangular area occupied by the button on the screen.
     - _active (bool): A flag indicating whether the button is clickable or not.
+    - _letter_button_clicked (bool): A flag indicating if it is not a letter button then it will remain False for the whole duration
 
     Methods:
     - draw(screen: pygame.Surface): Draws the button on the specified surface.
@@ -41,7 +42,10 @@ class Button:
         # Initially the button is clickable
         self._clickable: bool = True
         self._hovering: bool = False
-        self._button_name = button_name
+        self._button_name: str = button_name
+        # Indicates if it is a letter button and if it was clicked
+        # If it is not a letter button then it will remain False for the whole duration
+        self._letter_button_clicked: bool = False
 
     # This function draws the button on the screen
     def draw(self, screen: pygame.Surface):
@@ -51,6 +55,22 @@ class Button:
     def check_hovering(self, mouse_pos):
         # Check if the mouse is hovering over the button
         self._hovering = self._rect.collidepoint(mouse_pos)
+
+    @property
+    def letter_button_clicked(self) -> bool:
+        return self._letter_button_clicked
+
+    @letter_button_clicked.setter
+    def letter_button_clicked(self, value: bool):
+        self._letter_button_clicked = value
+
+    @property
+    def position(self) -> tuple[int, int]:
+        return self._rect.x, self._rect.y
+
+    @position.setter
+    def position(self, value: tuple[int, int]):
+        self._rect.x, self._rect.y = value
 
     @property
     def clickable(self) -> bool:

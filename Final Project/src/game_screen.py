@@ -13,7 +13,7 @@ from classes.button import Button
 from font import set_font
 
 
-def render_game_screen(word_cls, all_button_instances, screen) -> None:
+def render_game_screen(word, all_button_instances, screen) -> None:
     # Reuse the code from start_screen.py as the background screen is the same
     # Render the screen surface
     start_screen.render_bg(screen)
@@ -22,13 +22,15 @@ def render_game_screen(word_cls, all_button_instances, screen) -> None:
     exit_button = start_screen.render_exit_button(screen)
 
     # Renders the Topic : <topic> text
-    render_topic_text(word_cls.topic, screen)
+    render_topic_text(word.topic, screen)
 
     # Rended the masked word in the middle of the screen
-    render_masked_word(word_cls, screen)
+    render_masked_word(word, screen)
 
     # Render the alphabet buttons
-    render_alphabet_buttons(screen, all_button_instances)
+    render_letter_buttons(screen, all_button_instances)
+
+    put_v_or_x(screen, all_button_instances, word)
 
     return exit_button
 
@@ -92,9 +94,10 @@ def render_masked_word(word: Word, screen: pygame.Surface) -> pygame.Rect:
     screen.blit(render, rect)
 
 
-def render_alphabet_buttons(
+# Function to render the letter buttons in rows and columns
+def render_letter_buttons(
     screen: pygame.Surface, all_button_instances: list[Button]
-) -> tuple[Button]:
+) -> None:
     # Load letter images into a dictionary
     letter_images: dict[str, pygame.Surface] = {}
     for letter in string.ascii_uppercase:
@@ -102,67 +105,80 @@ def render_alphabet_buttons(
             f"CS50P/Final Project/images/letters/{letter}.png"
         )
 
-    # Function to render the letter buttons in rows and columns
-    def render_letter_buttons(
-        screen: pygame.Surface, letter_images: dict[str, pygame.Surface]
-    ) -> tuple[Button]:
-        # The dimensions of the buttons
-        button_width, button_height = 81, 93
-        
-        # The margin between buttons
-        button_margin_x, button_margin_y = 10, 10
-        
-        # 26 letters in the alphabet / 2 rows = 13 letters per row
-        max_buttons_per_row = 13
+    # The dimensions of the buttons
+    button_width, button_height = 81, 93
 
-        # Total number of buttons to be displayed
-        total_buttons = len(letter_images)
-        rows = (total_buttons + max_buttons_per_row - 1) // max_buttons_per_row
+    # The margin between buttons
+    button_margin_x, button_margin_y = 10, 10
 
-        # The X position of the first button (A)
-        start_x = (
-            screen.get_width()
-            - (max_buttons_per_row * (button_width + button_margin_x) - button_margin_x)
-        ) // 2
-        
-        # The Y position of the first button (A)
-        start_y = (
-            (
-                screen.get_height()
-                - (rows * (button_height + button_margin_y) - button_margin_y)
-            )
-            // 2
-        ) + screen.get_height() * 0.35
+    # 26 letters in the alphabet / 2 rows = 13 letters per row
+    max_buttons_per_row = 13
 
-        # Counts how many buttons was created
-        buttons_count = 0
+    # Total number of buttons to be displayed
+    total_buttons = len(letter_images)
+    rows = (total_buttons + max_buttons_per_row - 1) // max_buttons_per_row
 
-        # Iterate through each letter and its corresponding image
-        for letter, image in letter_images.items():
-            # Create a Button instance for the letter
-            letter_button = Button(image, button_width, button_height, letter)
-            letter_button.x = start_x
-            letter_button.y = start_y
+    # The X position of the first button (A)
+    start_x = (
+        screen.get_width()
+        - (max_buttons_per_row * (button_width + button_margin_x) - button_margin_x)
+    ) // 2
 
-            # Draw the letter image onto the button
-            letter_button.draw(screen)
+    # The Y position of the first button (A)
+    start_y = (
+        (
+            screen.get_height()
+            - (rows * (button_height + button_margin_y) - button_margin_y)
+        )
+        // 2
+    ) + screen.get_height() * 0.35
 
-            # Append the button instance to the list
-            all_button_instances.append(letter_button)
-            buttons_count += 1
+    # Counts how many buttons was created
+    buttons_count = 0
 
-            start_x += button_width + button_margin_x
+    # Iterate through each letter and its corresponding image
+    for letter, image in letter_images.items():
+        # Create a Button instance for the letter
+        letter_button = Button(image, button_width, button_height, letter)
+        letter_button.x = start_x
+        letter_button.y = start_y
 
-            # Move to the next row if the maximum buttons per row is reached
-            if buttons_count % max_buttons_per_row == 0:
-                start_x = (
-                    screen.get_width()
-                    - (
-                        max_buttons_per_row * (button_width + button_margin_x)
-                        - button_margin_x
-                    )
-                ) // 2
-                start_y += button_height + button_margin_y
+        # Draw the letter image onto the button
+        letter_button.draw(screen)
 
-    # Render the letter buttons
-    render_letter_buttons(screen, letter_images)
+        # Append the button instance to the list
+        all_button_instances.append(letter_button)
+        buttons_count += 1
+
+        start_x += button_width + button_margin_x
+
+        # Move to the next row if the maximum buttons per row is reached
+        if buttons_count % max_buttons_per_row == 0:
+            start_x = (
+                screen.get_width()
+                - (
+                    max_buttons_per_row * (button_width + button_margin_x)
+                    - button_margin_x
+                )
+            ) // 2
+            start_y += button_height + button_margin_y
+
+
+def put_v_or_x(
+    screen: pygame.Surface, all_button_instances: list[Button], word: Word
+) -> None:
+    for button in all_button_instances:
+        if button.letter_button_clicked:
+            if button.name in word.word:
+                render_v_or_x_image(screen, button, "v")
+            else:
+                render_v_or_x_image(screen, button, "x")
+
+
+def render_v_or_x_image(screen: pygame.Surface, button: Button, image_name) -> None:
+    image = pygame.image.load(f"CS50P/Final Project/images/{image_name}.png")
+
+    pos_x = button.x
+    pos_y = button.y
+
+    screen.blit(image, (pos_x, pos_y))

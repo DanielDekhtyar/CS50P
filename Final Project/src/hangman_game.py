@@ -11,7 +11,6 @@ from classes.word import Word
 from src import hangman_game
 from src import game_screen
 from src import game_loop
-from font import set_font
 import project
 
 
@@ -35,15 +34,17 @@ def game_logic(screen, level, all_button_instances):
 
             # If mouse hovers, it will change the cursor to a pointing hand
             game_loop.mouse_when_over_button(all_button_instances, mouse_pos)
-        
+
         # When a letter button was clicked, guess_letters will check if the guessed letter is in the word.
         # If it is, word.guessed_letters_index is changed to True in the corresponding index.
-        is_guessed = guess_letter(word, all_button_instances, mouse_pos)
+        is_guessed = guess_letter(screen, word, all_button_instances, mouse_pos)
 
         # If a letter was guessed, the game screen will be updated
         if is_guessed:
             screen.fill((255, 255, 255))
-            exit_button = game_screen.render_game_screen(word, all_button_instances, screen)
+            exit_button = game_screen.render_game_screen(
+                word, all_button_instances, screen
+            )
 
         # Update the screen once after processing events
         pygame.display.update()
@@ -69,10 +70,10 @@ def get_word_cls(level):
 def get_random_word(level) -> tuple[str, str]:
     # Path to where all the csv files with the words are located within the project
     csv_path = r"CS50P/Final Project/data/"
-    
+
     # Get the CSV file name based on the level
     csv_file = f"{level}.csv"
-    
+
     # Join the path to the file
     path_to_csv = os.path.join(csv_path, csv_file)
 
@@ -93,22 +94,44 @@ def get_random_word(level) -> tuple[str, str]:
 
 
 def guess_letter(
-    word: Word, all_button_instances: list[pygame.Rect], mouse_pos: tuple[int]
+    screen: pygame.Surface,
+    word: Word,
+    all_button_instances: list[pygame.Rect],
+    mouse_pos: tuple[int],
 ) -> None:
     # Getting the button.name of the button that was clicked. If no button was clicked, it will get None
-    button_clicked: str | None = project.button_clicked(all_button_instances, mouse_pos)
-    
+    button_name: str | None = project.button_clicked(all_button_instances, mouse_pos)
+
     # Initializing is_guessed that will be used to check if a letter was guessed or not
     is_guessed = False
-    
-    if button_clicked is not None and button_clicked != "Exit":
+
+    # Get the button instance
+    button = get_button_instance(button_name, all_button_instances)
+
+    if button_name is not None and button_name != "Exit":
         # Goes over all the letters in the word
+
+        # Indicate that the letter button was clicked
+        button.letter_button_clicked = True
+
         for i, char in enumerate(word.word):
             # If the letter that was guessed is in the word, change the guessed_letters_index to True
-            if char == button_clicked:
+            if char == button_name:
+                # Make the letter visible in the masked word
                 word.guessed_letters_index[i] = True
+
                 # Indicates that the letter was guessed
                 is_guessed = True
-    
+
+        game_screen.render_v_or_x_image(screen, button, "x")
+
     # It returned to indicate that the game screen needs to be updated
     return is_guessed
+
+
+def get_button_instance(button_name: str, all_button_instances: list[pygame.Rect]):
+    # Goes over all the buttons in the list
+    for button in all_button_instances:
+        # If the button.name matches the button_name, it will return the button
+        if button.name == button_name:
+            return button
