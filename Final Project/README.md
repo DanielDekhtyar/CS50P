@@ -12,13 +12,39 @@
 
 ## 📝 Changelog:
 
-> ### Last Version : 0.9.0
+> ### Last Version : 0.9.1
 >
-> ### Last Update : 25-12-2023
+> ### Last Update : 26-12-2023
 >
 > _Date format DD-MM-YYYY_
 
-### 🗓️ _Version 0.9.0 - 25-12-2023 (latest commit)_
+### 🗓️ _Version 0.9.1 - 26-12-2023 (latest commit)_
+
+---
+
+#### 🚀 Added
+- In `game_screen.py`, `put_v_or_x()` was implemented.  
+Every time we rerender the game screen, it puts the green V or red X on the buttons that were previously clicked, depending on whether the letter is in the word or not.
+- In `game_screen.py`, `render_v_or_x_image()` was implemented.  
+It renders the green V or red X over the letter button after they were clicked, depending on whether the letter is in the word or not.
+- In `hangman_game.py`, `get_button_instance()` was implemented.
+It returns the instance of a Button class based on the button name(this_button.name).
+- In `hangman_game.py`, `guess_letter()` was reimplemented to use `put_v_or_x()`.
+
+
+#### 🔥 Enhancements
+- Button class changed
+  - `letter_button_clicked`: bool - If it is not a letter button then it will remain False for the whole duration.
+  - `position`: tuple[int, int] - The position of the button on the screen (X, Y)
+- In `game_screen.py`, `word_cls` was changed to `word`
+- In `game_screen.py`, `render_alphabet_buttons()` and `render_letter_buttons()` merged in to `render_letter_buttons()`. No functionality change.
+
+
+#### 🛠️ Fixed
+- In `game_screen.py`, `render_letter_buttons()` type annotations changed from `-> tuple[Button]` to `-> None`.
+
+
+### 🗓️ _Version 0.9.0 - 25-12-2023 (commit 3c5b924)_
 
 ---
 
@@ -29,11 +55,11 @@
   - Letter buttons are clickable.
   - When the correct letter is guessed, the mask word will update and reveal the guessed word.
 - `guess_letter()` was implemented inside `hangman_game.py`.  
-It takes the guessed letter and check if it is one of the letters of the word.  
+It takes the guessed letter and checks if it is one of the letters of the word.  
 If it is, `word.guessed_letters_index` is changed to `True` in the corresponding index.
 
 #### 🔥 Enhancements
-- In `start_screen.py`, what previously was `render_screen()` not changed to `render_bg` to better represent its updated purpose.
+- In `start_screen.py`, what previously was `render_screen()` was not changed to `render_bg` to better represent its updated purpose.
 - `render_bg()` no longer returns `screen` but instead takes a `screen` parameter.  
 This is because `screen` is no longer created inside the function.
 - Masked word font size changed from `0.25` to `0.1` percent of the screen.  
