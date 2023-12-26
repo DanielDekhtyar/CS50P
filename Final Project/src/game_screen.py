@@ -13,7 +13,7 @@ from classes.button import Button
 from font import set_font
 
 
-def render_game_screen(word, all_button_instances, screen) -> None:
+def render_game_screen(word, all_button_instances, screen, hangman_attempts) -> None:
     # Reuse the code from start_screen.py as the background screen is the same
     # Render the screen surface
     start_screen.render_bg(screen)
@@ -27,9 +27,13 @@ def render_game_screen(word, all_button_instances, screen) -> None:
     # Rended the masked word in the middle of the screen
     render_masked_word(word, screen)
 
+    # Render the hangman
+    render_the_hangman(screen, hangman_attempts)
+
     # Render the alphabet buttons
     render_letter_buttons(screen, all_button_instances)
 
+    # Render green V or red X over letter buttons wherever needed
     put_v_or_x(screen, all_button_instances, word)
 
     return exit_button
@@ -55,7 +59,7 @@ def render_topic_text(topic: str, screen: pygame.Surface) -> pygame.Rect:
     rect: pygame.Rect = render.get_rect()
 
     # Position the text at the top center of the screen
-    rect.centerx = screen.get_rect().centerx
+    rect.centerx = int(screen.get_rect().centerx)
 
     # Adjust this value to set the vertical position
     rect.y = int(screen.get_height() * 0.05)
@@ -88,7 +92,7 @@ def render_masked_word(word: Word, screen: pygame.Surface) -> pygame.Rect:
     rect.centerx = screen.get_rect().centerx
 
     # Adjust this value to set the vertical position
-    rect.centery = screen.get_rect().centery - int(screen.get_height() * 0.045)
+    rect.centery = screen.get_rect().centery
 
     # Draw the text
     screen.blit(render, rect)
@@ -182,3 +186,53 @@ def render_v_or_x_image(screen: pygame.Surface, button: Button, image_name) -> N
     pos_y = button.y
 
     screen.blit(image, (pos_x, pos_y))
+
+
+def render_the_hangman(screen: pygame.Surface, hangman_image_number: int) -> None:
+    hangman_image = pygame.image.load(
+        f"CS50P/Final Project/images/hangman/{hangman_image_number}.png"
+    )
+
+    image_height = int(screen.get_height() * 0.3)
+
+    image_width = int(screen.get_width() * 0.18)
+
+    hangman_image = pygame.transform.scale(hangman_image, (image_width, image_height))
+
+    # Get the desired X position
+    pos_x = int(screen.get_width() * 0.05)
+
+    # Adjust this value to set the vertical position
+    pos_y = int(screen.get_height() * 0.05)
+
+    # Draw the hangman on the screen
+    screen.blit(hangman_image, (pos_x, pos_y))
+
+
+# Render the GAME OVER! text on the screen
+def render_game_over(screen: pygame.Surface) -> None:
+    # Set the percentage of the screen that the text will occupy
+    font_percentage = 0.35
+
+    # Set the font size of the text according to the percentage of the screen
+    font_size = int(screen.get_height() * font_percentage)
+
+    # Choose the font of the text
+    font = pygame.font.Font(set_font.game_over_font(), font_size)
+
+    # Title text
+    text: str = "GAME OVER!"
+
+    # Render the text
+    render = font.render(text, True, (0, 0, 0))
+
+    # Get the rect of the rendered text
+    rect: pygame.Rect = render.get_rect()
+
+    # Position the text at the top center of the screen
+    rect.centerx = int(screen.get_rect().centerx)
+
+    # Adjust this value to set the vertical position
+    rect.y = int(screen.get_rect().centery) - int(screen.get_height() * 0.15)
+    # Draw the text
+    screen.blit(render, rect)

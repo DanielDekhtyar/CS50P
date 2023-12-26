@@ -18,9 +18,17 @@ def game_logic(screen, level, all_button_instances):
     # Make all the buttons from the main screen unclickable in the game screen
     change_main_screen_button_clickability(all_button_instances)
 
+    # Count how many attempts the user has made
+    # Max 7 attempts till the game is over
+    hangman_attempts = 0
+
     # Create the word class
     word = get_word_cls(level)
-    exit_button = game_screen.render_game_screen(word, all_button_instances, screen)
+
+    # Render all the element on the screen
+    exit_button = game_screen.render_game_screen(
+        word, all_button_instances, screen, hangman_attempts
+    )
 
     # Game screen Game Loop:
     is_playing = True
@@ -37,14 +45,13 @@ def game_logic(screen, level, all_button_instances):
 
         # When a letter button was clicked, guess_letters will check if the guessed letter is in the word.
         # If it is, word.guessed_letters_index is changed to True in the corresponding index.
-        is_guessed = guess_letter(screen, word, all_button_instances, mouse_pos)
+        tried_guessing, hangman_attempts = guess_letter(
+            screen, word, all_button_instances, mouse_pos, hangman_attempts
+        )
 
         # If a letter was guessed, the game screen will be updated
-        if is_guessed:
-            screen.fill((255, 255, 255))
-            exit_button = game_screen.render_game_screen(
-                word, all_button_instances, screen
-            )
+        if tried_guessing:
+            update_the_hangman(hangman_attempts, word, all_button_instances, screen)
 
         # Update the screen once after processing events
         pygame.display.update()
@@ -98,35 +105,43 @@ def guess_letter(
     word: Word,
     all_button_instances: list[pygame.Rect],
     mouse_pos: tuple[int],
+    hangman_attempts: int,
 ) -> None:
     # Getting the button.name of the button that was clicked. If no button was clicked, it will get None
     button_name: str | None = project.button_clicked(all_button_instances, mouse_pos)
 
-    # Initializing is_guessed that will be used to check if a letter was guessed or not
-    is_guessed = False
+    # Check if any letter was clicked at all
+    try_guessing: bool = False
+
+    # Initializing is_guessed that will be used to check if a letter was guessed right or not
+    is_guessed: bool = False
 
     # Get the button instance
     button = get_button_instance(button_name, all_button_instances)
 
-    if button_name is not None and button_name != "Exit":
-        # Goes over all the letters in the word
+    if button is not None and button.letter_button_clicked is False:
+        if button_name is not None and button_name != "Exit":
+            # Goes over all the letters in the word
 
-        # Indicate that the letter button was clicked
-        button.letter_button_clicked = True
+            # Indicate that the letter button was clicked
+            button.letter_button_clicked = True
 
-        for i, char in enumerate(word.word):
-            # If the letter that was guessed is in the word, change the guessed_letters_index to True
-            if char == button_name:
-                # Make the letter visible in the masked word
-                word.guessed_letters_index[i] = True
+            for i, char in enumerate(word.word):
+                # If the letter that was guessed is in the word, change the guessed_letters_index to True
+                if char == button_name:
+                    # Make the letter visible in the masked word
+                    word.guessed_letters_index[i] = True
+                    is_guessed = True
 
-                # Indicates that the letter was guessed
-                is_guessed = True
+            if is_guessed is False:
+                hangman_attempts += 1
 
-        game_screen.render_v_or_x_image(screen, button, "x")
+            # Indicates that the letter was guessed
+            try_guessing = True
 
-    # It returned to indicate that the game screen needs to be updated
-    return is_guessed
+            game_screen.render_v_or_x_image(screen, button, "x")
+
+    return try_guessing, hangman_attempts
 
 
 def get_button_instance(button_name: str, all_button_instances: list[pygame.Rect]):
@@ -135,3 +150,29 @@ def get_button_instance(button_name: str, all_button_instances: list[pygame.Rect
         # If the button.name matches the button_name, it will return the button
         if button.name == button_name:
             return button
+
+
+def update_the_hangman(
+    hangman_attempts: int,
+    word: Word,
+    all_button_instances: list[pygame.Rect],
+    screen: pygame.Surface,
+):
+    # If there are attempts left
+    if hangman_attempts < 7:
+        exit_button = game_screen.render_game_screen(
+            word, all_button_instances, screen, hangman_attempts
+        )
+
+    # If no more attempts are left, the game is over
+    if hangman_attempts >= 7:
+        exit_button = game_screen.render_game_screen(
+            word, all_button_instances, screen, hangman_attempts
+        )
+        # Render the GAME OVER! text on the screen
+        game_screen.render_game_over(screen)
+
+        # Make all the buttons, except the exit button, unclickable
+        for button in all_button_instances:
+            if button.name != "Exit":
+                button.clickable = False
