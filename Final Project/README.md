@@ -12,17 +12,37 @@
 
 ## 📝 Changelog:
 
-> ### Last Version : 0.9.1
+> ### Last Version : 0.9.2
 >
 > ### Last Update : 26-12-2023
 >
 > _Date format DD-MM-YYYY_
 
-### 🗓️ _Version 0.9.1 - 26-12-2023 (latest commit)_
+### 🗓️ _Version 0.9.2 - 26-12-2023 (latest commit)_
 
 ---
 
 #### 🚀 Added
+
+- In `game_screen.py`, `render_the_hangman()` implemented.  
+It renders the hangman image on the screen.
+- `hangman_attempts` variable introduced. It may be found in `hangman_game.py` as well as `game_screen.py`.  
+Its purpose is to count how many failed attempts the user had to guess the word.
+If more than 7 failed attempts are made, the game will end.
+- `guess_letter()` gets `hangman_attempts`, increases the count of failed attempts made, and returns the updated number.
+- If a guess was made, be it successful or not, `update_the_hangman()` will update the screen.
+- `try_guessing` indicated if a guess attempt happened or not.
+- `is_guessed` indicates if the guess attempt was successful or not.
+- If more the 7 failed attempts are made, `render_game_over()` will render GAME OVER! on the screen.  
+Also, it will make all the buttons, except the exit button, unclickable.
+
+
+### 🗓️ _Version 0.9.1 - 26-12-2023 (commit f98a664)_
+
+---
+
+#### 🚀 Added
+
 - In `game_screen.py`, `put_v_or_x()` was implemented.  
 Every time we rerender the game screen, it puts the green V or red X on the buttons that were previously clicked, depending on whether the letter is in the word or not.
 - In `game_screen.py`, `render_v_or_x_image()` was implemented.  
@@ -33,6 +53,7 @@ It returns the instance of a Button class based on the button name(this_button.n
 
 
 #### 🔥 Enhancements
+
 - Button class changed
   - `letter_button_clicked`: bool - If it is not a letter button then it will remain False for the whole duration.
   - `position`: tuple[int, int] - The position of the button on the screen (X, Y)
@@ -41,6 +62,7 @@ It returns the instance of a Button class based on the button name(this_button.n
 
 
 #### 🛠️ Fixed
+
 - In `game_screen.py`, `render_letter_buttons()` type annotations changed from `-> tuple[Button]` to `-> None`.
 
 
@@ -59,6 +81,7 @@ It takes the guessed letter and checks if it is one of the letters of the word.
 If it is, `word.guessed_letters_index` is changed to `True` in the corresponding index.
 
 #### 🔥 Enhancements
+
 - In `start_screen.py`, what previously was `render_screen()` was not changed to `render_bg` to better represent its updated purpose.
 - `render_bg()` no longer returns `screen` but instead takes a `screen` parameter.  
 This is because `screen` is no longer created inside the function.
@@ -68,6 +91,7 @@ It was done to suit better the new font.
 - `render_alphabet_buttons` in `game_screen.py` no longer returns `button[]` as it is no longer needed
 
 #### 🛠️ Fixed
+
 - Screen flickering when re-rendering screen fixed
   - It was caused by `screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE)` being placed inside `render_start_screen()` in `start_screen`, so the screen was created each time this function was called.  
   Now `screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE)` is called once at the start of `main()`.
