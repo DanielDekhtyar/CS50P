@@ -17,3 +17,7 @@ def topic_font():
 
 def masked_word_font():
     return get_font.font("phitradesign Handwritten Thin.ttf")
+
+
+def game_over_font():
+    return get_font.font("Strenght To Strenght.otf")
