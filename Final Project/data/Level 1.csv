@@ -1,58 +1,140 @@
 topic,word
-Animals,DOG
-Animals,CAT
-Animals,OWL
-Animals,FOX
-Fruits,APPLE
-Fruits,PEAR
-Fruits,GRAPE
-Fruits,KIWI
-Colors,RED
-Colors,BLUE
-Colors,YELLOW
-Colors,GREEN
-Countries,FRANCE
-Countries,SPAIN
-Countries,CHINA
-Countries,SOUTH KOREA
-Countries,ISRAEL
-Celebrities,LEONARDO DICAPRIO
-Celebrities,ANGELINA JOLIE
-Celebrities,BEYONCE
-Celebrities,KEANU REEVES
-Transportation,CAR
-Transportation,BIKE
-Transportation,TRAIN
-Transportation,BOAT
-Fictional Characters,HARRY POTTER
-Fictional Characters,KATNISS EVERDEEN
-Fictional Characters,SPONGEBOB SQUAREPANTS
-Fictional Characters,SIMBA
-Musical Instruments,PIANO
-Musical Instruments,GUITAR
-Musical Instruments,VIOLIN
-Musical Instruments,TRUMPET
-Furniture,CHAIR
-Furniture,TABLE
-Furniture,BED
-Furniture,SOFA
-Food,PIZZA
-Food,BURGER
-Food,PASTA
-Food,SUSHI
-Movies,THE SHAWSHANK REDEMPTION
-Movies,INCEPTION
-Movies,THE GODFATHER
-Movies,PULP FICTION
-Sports,SOCCER
-Sports,BASKETBALL
-Sports,TENNIS
-Sports,GOLF
-Video Games,MARIO KART
-Video Games,THE LEGEND OF ZELDA
-Video Games,PAC-MAN
-Video Games,MINECRAFT
-Music,ROCK
-Music,POP
-Music,JAZZ
-Music,CLASSICAL
+Animals,Dog
+Animals,Cat
+Animals,Owl
+Animals,Fox
+Animals,Horse
+Animals,Rabbit
+Animals,Hamster
+Animals,Turtle
+Animals,Parrot
+Animals,Duck
+Colors,Red
+Colors,Blue
+Colors,Yellow
+Colors,Green
+Colors,Orange
+Colors,Purple
+Colors,Brown
+Colors,Pink
+Colors,Grey
+Colors,White
+Countries,France
+Countries,Spain
+Countries,China
+Countries,South Korea
+Countries,Italy
+Countries,India
+Countries,USA
+Countries,Japan
+Countries,Australia
+Countries,Brazil
+Transportation,Car
+Transportation,Bike
+Transportation,Train
+Transportation,Boat
+Transportation,Plane
+Transportation,Bus
+Transportation,Motorcycle
+Transportation,Subway
+Transportation,Tram
+Transportation,Taxi
+Musical Instruments,Piano
+Musical Instruments,Guitar
+Musical Instruments,Violin
+Musical Instruments,Trumpet
+Musical Instruments,Flute
+Musical Instruments,Drums
+Musical Instruments,Cello
+Musical Instruments,Saxophone
+Musical Instruments,Xylophone
+Musical Instruments,Trombone
+Clothes,T-Shirt
+Clothes,Jeans
+Clothes,Dress
+Clothes,Hat
+Clothes,Shoes
+Clothes,Socks
+Clothes,Coat
+Clothes,Gloves
+Clothes,Skirt
+Clothes,Scarf
+Jobs,Doctor
+Jobs,Teacher
+Jobs,Engineer
+Jobs,Artist
+Jobs,Police Officer
+Jobs,Firefighter
+Jobs,Waiter
+Jobs,Journalist
+Jobs,Chef
+Jobs,Driver
+Body Parts,Head
+Body Parts,Arm
+Body Parts,Leg
+Body Parts,Hand
+Body Parts,Foot
+Body Parts,Eye
+Body Parts,Ear
+Body Parts,Nose
+Body Parts,Mouth
+Body Parts,Hair
+Sports,Soccer
+Sports,Basketball
+Sports,Tennis
+Sports,Golf
+Sports,Swimming
+Sports,Running
+Sports,Cycling
+Sports,Volleyball
+Sports,Cricket
+Sports,Skiing
+Music Genres,Pop
+Music Genres,Rock
+Music Genres,Hip-Hop
+Music Genres,Jazz
+Music Genres,Classical
+Music Genres,Reggae
+Music Genres,Country
+Music Genres,Blues
+Music Genres,Electronic
+Music Genres,Metal
+Movies,The Lion King
+Movies,Toy Story
+Movies,Finding Nemo
+Movies,The Incredibles
+Movies,The Matrix
+Movies,Forrest Gump
+Movies,The Shawshank Redemption
+Movies,Harry Potter
+Movies,Star Wars
+TV Shows,Friends
+TV Shows,Game of Thrones
+TV Shows,Breaking Bad
+TV Shows,Stranger Things
+TV Shows,The Simpsons
+TV Shows,The Office
+TV Shows,Black Mirror
+TV Shows,Westworld
+TV Shows,Sherlock
+TV Shows,Narcos
+Video Games,Mario
+Video Games,The Legend of Zelda
+Video Games,Pokemon
+Video Games,Minecraft
+Video Games,Sonic the Hedgehog
+Video Games,Super Mario Bros
+Video Games,Fortnite
+Video Games,Assassin's Creed
+Video Games,Grand Theft Auto
+Video Games,Overwatch
+Cities,New York
+Cities,London
+Cities,Paris
+Cities,Tokyo
+Cities,Rome
+Cities,Sydney
+Cities,Rio de Janeiro
+Cities,Cairo
+Cities,Mumbai
+Cities,Beijing

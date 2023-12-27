@@ -1,57 +1,153 @@
 topic,word
-Animals,ELEPHANT
-Animals,GIRAFFE
-Animals,ZEBRA
-Animals,MONKEY
-Fruits,BANANA
-Fruits,MANGO
-Fruits,ORANGE
-Fruits,PEACH
-Colors,ORANGE
-Colors,PURPLE
-Colors,BROWN
-Colors,PINK
-Countries,COLUMBIA
-Countries,MALAYSIA
-Countries,TURKEY
-Countries,EGYPT
-Celebrities,TOM HANKS
-Celebrities,JENNIFER ANISTON
-Celebrities,MORGAN FREEMAN
-Celebrities,SCARLETT JOHANSSON
-Transportation,PLANE
-Transportation,BUS
-Transportation,MOTORCYCLE
-Transportation,SUBWAY
-Fictional Characters,LARA CROFT
-Fictional Characters,JAMES BOND
-Fictional Characters,MICKEY MOUSE
-Fictional Characters,ARAGORN
-Musical Instruments,HARMONICA
-Musical Instruments,HARP
-Musical Instruments,ACCORDEON
-Musical Instruments,BANJO
-Furniture,DINING TABLE
-Furniture,ARMCHAIR
-Furniture,CABINET
-Furniture,OTTOMAN
-Food,WATERMELON
-Food,STRAWBERRY
-Food,BLUEBERRY
-Food,RASPBERRY
-Movies,FIGHT CLUB
-Movies,THE MATRIX
-Movies,STAR WARS
-Movies,AVATAR
-Sports,FOOTBALL
-Sports,SWIMMING
-Sports,VOLLEYBALL
-Sports,CRICKET
-Video Games,SONIC THE HEDGEHOG
-Video Games,PONG
-Video Games,SUPER MARIO BROS
-Video Games,STREET FIGHTER
-Music,HIP-HOP
-Music,COUNTRY
-Music,REGGAE
-Music,ELECTRONIC
+Animals,Elephant
+Animals,Giraffe
+Animals,Zebra
+Animals,Monkey
+Animals,Panda
+Animals,Kangaroo
+Animals,Cheetah
+Animals,Penguin
+Animals,Koala
+Animals,Ostrich
+Colors,Orange
+Colors,Indigo
+Colors,Turquoise
+Colors,Magenta
+Colors,Beige
+Colors,Crimson
+Colors,Lavender
+Colors,Peach
+Colors,Maroon
+Colors,Cyan
+Countries,Colombia
+Countries,Malaysia
+Countries,Turkey
+Countries,Egypt
+Countries,Peru
+Countries,Thailand
+Countries,Mexico
+Countries,South Africa
+Countries,Ukraine
+Countries,Serbia
+Countries,New Zealand
+Countries,Iceland
+Countries,Morocco
+Countries,Poland
+Countries,Ireland
+Countries,Vietnam
+Countries,Cambodia
+Countries,Romania
+Countries,Portugal
+Countries,Philippines
+Countries,Kenya
+Countries,Israel
+Countries,Jamaica
+Countries,Bahrain
+Transportation,Helicopter
+Transportation,Truck
+Transportation,Tram
+Transportation,Yacht
+Transportation,Segway
+Transportation,Kayak
+Transportation,Hang Glider
+Transportation,Electric Scooter
+Transportation,Monorail
+Transportation,Rollerblades
+Musical Instruments,Harmonica
+Musical Instruments,Harp
+Musical Instruments,Accordion
+Musical Instruments,Banjo
+Musical Instruments,Ocarina
+Musical Instruments,Marimba
+Musical Instruments,Ukulele
+Musical Instruments,Mandolin
+Musical Instruments,Double Bass
+Musical Instruments,Flugelhorn
+Clothes,Dining Table
+Clothes,Armchair
+Clothes,Cabinet
+Clothes,Ottoman
+Clothes,Loveseat
+Clothes,Dressing Table
+Clothes,Bench
+Clothes,Footstool
+Clothes,Buffet
+Clothes,Shelf
+Jobs,Recliner
+Jobs,Bar Stool
+Jobs,Cupboard
+Jobs,Hutch
+Jobs,Chest of Drawers
+Jobs,Futon
+Jobs,Screen
+Jobs,Rocker
+Jobs,Hammock
+Jobs,Screen
+Body Parts,Shoulder
+Body Parts,Elbow
+Body Parts,Wrist
+Body Parts,Ankle
+Body Parts,Knee
+Body Parts,Finger
+Body Parts,Toe
+Body Parts,Neck
+Body Parts,Chest
+Body Parts,Back
+Sports,Football
+Sports,Swimming
+Sports,Volleyball
+Sports,Cricket
+Sports,Rugby
+Sports,Badminton
+Sports,Archery
+Sports,Fencing
+Sports,Ice Hockey
+Sports,Table Tennis
+Music Genres,Hip-Hop
+Music Genres,Country
+Music Genres,Reggae
+Music Genres,Electronic
+Music Genres,Classical
+Music Genres,Pop Rock
+Music Genres,Blues Rock
+Music Genres,Jazz Fusion
+Music Genres,Metalcore
+Music Genres,Indie Pop
+Movies,Fight Club
+Movies,The Matrix
+Movies,Star Wars
+Movies,Avatar
+Movies,The Dark Knight
+Movies,Schindler's List
+Movies,The Lord of the Rings
+Movies,Titanic
+Movies,Interstellar
+TV Shows,Stranger Things
+TV Shows,The Simpsons
+TV Shows,The Office
+TV Shows,Black Mirror
+TV Shows,Westworld
+TV Shows,Sherlock
+TV Shows,Narcos
+TV Shows,Fargo
+TV Shows,Breaking Bad
+Video Games,The Witcher
+Video Games,Fortnite
+Video Games,League of Legends
+Video Games,Assassin's Creed
+Video Games,Dark Souls
+Video Games,Deus Ex
+Video Games,World of Warcraft
+Video Games,Uncharted
+Video Games,Minecraft
+Video Games,Pokemon
+Cities,Shanghai
+Cities,Mumbai
+Cities,Istanbul
+Cities,Moscow
+Cities,Seoul
+Cities,Sao Paulo
+Cities,Lima
+Cities,Bangkok
+Cities,Tehran
+Cities,Bogota

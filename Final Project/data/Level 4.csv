@@ -1,57 +1,167 @@
 topic,word
-Animals,CHIMPANZEE
-Animals,PORCUPINE
-Animals,RHINOCEROS
-Animals,HYENA
-Fruits,GUAVA
-Fruits,JABUTICABA
-Fruits,LYCHEE
-Fruits,KUMQUAT
-Colors,SAFFRON
-Colors,OCHER
-Colors,EMERALD
-Colors,AZURE
-Countries,VIETNAM
-Countries,CAMBODIA
-Countries,ROMANIA
-Countries,PORTUGAL
-Celebrities,LIONEL MESSI
-Celebrities,CHARLIZE THERON
-Celebrities,DAVID BECKHAM
-Celebrities,HALLE BERRY
-Transportation,SEGWAY
-Transportation,KAYAK
-Transportation,HANG GLIDER
-Transportation,ELECTRIC SCOOTER
-Fictional Characters,ATTICUS FINCH
-Fictional Characters,DARTH VADER
-Fictional Characters,LISBETH SALANDER
-Fictional Characters,ELLEN RIPLEY
-Musical Instruments,SARANGI
-Musical Instruments,DJEMBE
-Musical Instruments,CONTRABASSOON
-Musical Instruments,SHAMISEN
-Furniture,CREDENZA
-Furniture,TUFFET
-Furniture,OTTOMAN
-Furniture,GAMING CHAIR
-Food,GYROS
-Food,QUINOA
-Food,KIMCHI
-Food,PAELLA
-Movies,INTERSTELLAR
-Movies,THE GREEN MILE
-Movies,THE SHINING
-Movies,CASABLANCA
-Sports,RUGBY
-Sports,BADMINTON
-Sports,ARCHERY
-Sports,FENCING
-Video Games,DARK SOULS
-Video Games,DEUS EX
-Video Games,WORLD OF WARCRAFT
-Video Games,UNCHARTED
-Music,HEAVY METAL
-Music,RAP
-Music,CLASSIC ROCK
-Music,TECHNO
+Animals,Chimpanzee
+Animals,Porcupine
+Animals,Rhinoceros
+Animals,Hyena
+Animals,Platypus
+Animals,Armadillo
+Animals,Praying Mantis
+Animals,Okapi
+Animals,Komodo Dragon
+Animals,Giraffe Weevil
+Colors,Saffron
+Colors,Ocher
+Colors,Emerald
+Colors,Azure
+Colors,Lilac
+Colors,Periwinkle
+Colors,Sepia
+Colors,Chartreuse
+Colors,Cerulean
+Colors,Vermilion
+Countries,Vietnam
+Countries,Cambodia
+Countries,Romania
+Countries,Portugal
+Countries,Saudi Arabia
+Countries,Argentina
+Countries,Denmark
+Countries,Finland
+Countries,Iran
+Countries,Ireland
+Countries,Netherlands
+Countries,New Zealand
+Countries,Ukraine
+Countries,Serbia
+Countries,Belgium
+Countries,Bangladesh
+Countries,Costa Rica
+Countries,Botswana
+Countries,Ecuador
+Countries,Luxembourg
+Transportation,Segway
+Transportation,Kayak
+Transportation,Hang Glider
+Transportation,Electric Scooter
+Transportation,Monorail
+Transportation,Hyperloop
+Transportation,Paraglider
+Transportation,Hovercraft
+Transportation,Submersible
+Transportation,Airship
+Musical Instruments,Sitar
+Musical Instruments,Bagpipes
+Musical Instruments,Kalimba
+Musical Instruments,Pan Flute
+Musical Instruments,Sarangi
+Musical Instruments,Djembe
+Musical Instruments,Contrabassoon
+Musical Instruments,Shamisen
+Musical Instruments,Didgeridoo
+Musical Instruments,Tabla
+Clothes,Chaise Longue
+Clothes,Armoire
+Clothes,Chiffonier
+Clothes,Spats
+Clothes,Turban
+Clothes,Frock Coat
+Clothes,Pelerine
+Clothes,Snood
+Clothes,Hobble Skirt
+Clothes,Monocle
+Jobs,Neurosurgeon
+Jobs,Astronomer
+Jobs,Geologist
+Jobs,Architect
+Jobs,Philanthropist
+Jobs,Diplomat
+Jobs,Physicist
+Jobs,Biomedical Engineer
+Jobs,Aerospace Engineer
+Jobs,Fashion Designer
+Jobs,Blacksmith
+Body Parts,Larynx
+Body Parts,Vertebra
+Body Parts,Clavicle
+Body Parts,Spleen
+Body Parts,Pelvis
+Body Parts,Femur
+Body Parts,Tibia
+Body Parts,Fibula
+Body Parts,Radius
+Body Parts,Ulna
+Sports,Synchronized Swimming
+Sports,Ski Jumping
+Sports,Trampoline
+Sports,Pentathlon
+Sports,Kitesurfing
+Sports,Skeleton
+Sports,Polo
+Sports,Biathlon
+Sports,Surfing
+Sports,Parkour
+Music Genres,Indie Rock
+Music Genres,Ska
+Music Genres,Opera
+Music Genres,Funk
+Music Genres,Trance
+Music Genres,Bluegrass
+Music Genres,Experimental
+Music Genres,Gothic Metal
+Music Genres,Psybient
+Music Genres,Chillstep
+Movies,The Shining
+Movies,Casablanca
+Movies,Inception
+Movies,Pulp Fiction
+Movies,The Godfather
+Movies,The Matrix
+Movies,Forrest Gump
+Movies,Interstellar
+Movies,The Silence of the Lambs
+Movies,Eternal Sunshine of the Spotless Mind
+Movies,2001: A Space Odyssey
+Movies,The Grand Budapest Hotel
+Movies,A Clockwork Orange
+Movies,Blade Runner
+Movies,Fight Club
+TV Shows,The Mandalorian
+TV Shows,Westworld
+TV Shows,Fargo
+TV Shows,Band of Brothers
+TV Shows,Fleabag
+TV Shows,Twin Peaks
+TV Shows,The Twilight Zone
+TV Shows,Breaking Bad
+TV Shows,Black Mirror
+TV Shows,Stranger Things
+Video Games,The Elder Scrolls
+Video Games,Red Dead Redemption
+Video Games,Mass Effect
+Video Games,The Last of Us
+Video Games,Final Fantasy
+Video Games,Portal
+Video Games,Halo
+Video Games,The Sims
+Video Games,Resident Evil
+Video Games,Metal Gear Solid
+Cities,Shanghai
+Cities,Mumbai
+Cities,Istanbul
+Cities,Moscow
+Cities,Tokyo
+Cities,Sydney
+Cities,Rio de Janeiro
+Cities,Cairo
+Cities,Mexico City
+Cities,Beijing
+Cities,Kolkata
+Cities,Karachi
+Cities,Manila
+Cities,Lagos
+Cities,Delhi
+Cities,Lahore
+Cities,Seoul
+Cities,Shenzhen
+Cities,Mumbai
+Cities,Guangzhou
