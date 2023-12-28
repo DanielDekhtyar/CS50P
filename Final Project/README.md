@@ -12,13 +12,36 @@
 
 ## 📝 Changelog:
 
-> ### Last Version : 0.9.2
+> ### Last Version : 0.9.9 release candidate
 >
-> ### Last Update : 26-12-2023
+> ### Last Update : 28-12-2023
 >
 > _Date format DD-MM-YYYY_
 
-### 🗓️ _Version 0.9.2 - 26-12-2023 (latest commit)_
+### 🗓️ _Version 0.9.9 release candidate - 28-12-2023 (latest commit)_
+
+---
+
+#### 🚀 Added
+- In the `project.py` in `if __name__ == "__main__"` a big change was made.
+  - All the code that happens only once during the game initialization is now inside the `if __name__ == "__main__"` block.  
+  Examples of this is `pygame.init()`, `pygame.display.set_caption`, screen initialization and `pygame.quit()`
+  This was done to make level restarts passable.  
+  `main()` is called to start a new level but all the things like pygame initialization and screen creation are done only once.
+- In `project.py`, `get_button_instance()` returns the Button instance given the name of the button.
+- In `project.py`, `exit_or_restart()` determines whether the user wants to exit the game or restart it based on the button clicked.
+- In `game_screen.py`, `render_restart_button()` implemented.
+- In `hangman_game.py`, different sounds from `play_sounds.py`(in `sounds` folder) are played using `pygame.mixer` at different events along the game.
+- In `update_the_hangman()` when the user fails 7 guesses, the game is over and the word is revealed using a for loop and `word.guessed_letters_index[i] = True`.
+
+
+#### 🔥 Enhancements
+- In `Word` class, when setting `word.word`, the word is all uppercase using `.upper()`.
+- In `start_screen.py`, when loading the buttons, the name of the buttons changed to work with the new picture files.  
+e.g `level 1.png` -> `easy.png` etc.
+
+
+### 🗓️ _Version 0.9.2 - 26-12-2023 (commit 3d8ccb6)_
 
 ---
 
