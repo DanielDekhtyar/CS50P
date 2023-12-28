@@ -4,7 +4,7 @@
     masked version of the word.
 
     Attributes:
-    - _word (str): The actual word.
+    - _word (str): The actual word. The word is converted to uppercase and stripped of any leading and trailing whitespaces.
     - _topic (str): The topic associated with the word.
     - _guessed_letters_index (list[bool]): A list representing whether each letter of the word has
     been guessed or not.
@@ -38,7 +38,7 @@
 
 class Word:
     def __init__(self, word, topic):
-        self._word = word.strip()
+        self._word = word.strip().upper()
         self._topic = topic.strip()
         self._guessed_letters_index = self._initialize_guessed_letters_index()
         self._masked_word = self.get_masked_word()

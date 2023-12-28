@@ -141,10 +141,10 @@ def render_buttons(screen: pygame.Surface, title_rect: pygame.Rect) -> tuple[But
     """
     # Load the level button images
     image_folder_path: str = "CS50P/Final Project/images/level buttons/"
-    level_1_img: pygame.Surface = pygame.image.load(f"{image_folder_path}level 1.png")
-    level_2_img: pygame.Surface = pygame.image.load(f"{image_folder_path}level 2.png")
-    level_3_img: pygame.Surface = pygame.image.load(f"{image_folder_path}level 3.png")
-    level_4_img: pygame.Surface = pygame.image.load(f"{image_folder_path}level 4.png")
+    level_1_img: pygame.Surface = pygame.image.load(f"{image_folder_path}easy.png")
+    level_2_img: pygame.Surface = pygame.image.load(f"{image_folder_path}medium.png")
+    level_3_img: pygame.Surface = pygame.image.load(f"{image_folder_path}hard.png")
+    level_4_img: pygame.Surface = pygame.image.load(f"{image_folder_path}very hard.png")
 
     # Size the images
     image_width, image_height = int(screen.get_width() * 0.25), int(

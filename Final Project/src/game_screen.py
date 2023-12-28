@@ -26,9 +26,15 @@ def render_game_screen(word, all_button_instances, screen, hangman_attempts) -> 
 
     # Rended the masked word in the middle of the screen
     render_masked_word(word, screen)
-
+    
     # Render the hangman
     render_the_hangman(screen, hangman_attempts)
+    
+    # Render the restart button
+    restart_button = render_restart_button(screen)
+    
+    # Add restart button in to all_button_instances
+    all_button_instances.append(restart_button)
 
     # Render the alphabet buttons
     render_letter_buttons(screen, all_button_instances)
@@ -37,6 +43,43 @@ def render_game_screen(word, all_button_instances, screen, hangman_attempts) -> 
     put_v_or_x(screen, all_button_instances, word)
 
     return exit_button
+
+
+def render_restart_button(screen: pygame.Surface) -> pygame.Rect:
+    """
+    The function `render_X_button` renders an exit button on the screen using an image and returns the
+    rectangle of the button for later use.
+
+    Args:
+    screen (pygame.Surface): The `screen` parameter is a `pygame.Surface` object representing the
+    surface on which the button will be rendered.
+
+    Returns:
+    the `rect` attribute of the `button` object.
+    """
+    # Load the image
+    image_folder_path: int = "CS50P/Final Project/images/"
+    image: pygame.Surface = pygame.image.load(f"{image_folder_path}restart.png")
+
+    button_width = int(screen.get_width() * 0.035)
+    button_height = int(screen.get_height() * 0.055)
+    # Create an instance of the exit (big X) button as a Button class instance
+    button = Button(image, button_width, button_height, "Restart")
+
+    # Set the X position of the exit button.
+    margin_from_right_side = int(screen.get_width() * 0.11)
+
+    # It calculates the position from the right side, leaving a specified margin
+    button.x: int = screen.get_width() - button.width - margin_from_right_side
+
+    # Set the Y position of the button
+    button.y: int = int(screen.get_height() * 0.03)
+
+    # Draw the button on the screen
+    button.draw(screen)
+
+    # Return the rect attribute for later use
+    return button
 
 
 def render_topic_text(topic: str, screen: pygame.Surface) -> pygame.Rect:
@@ -233,6 +276,6 @@ def render_game_over(screen: pygame.Surface) -> None:
     rect.centerx = int(screen.get_rect().centerx)
 
     # Adjust this value to set the vertical position
-    rect.y = int(screen.get_rect().centery) - int(screen.get_height() * 0.15)
+    rect.y = int(screen.get_rect().centery) - int(screen.get_height() * 0.2)
     # Draw the text
     screen.blit(render, rect)

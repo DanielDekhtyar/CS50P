@@ -18,28 +18,22 @@ from src import game_loop
 from src import hangman_game
 
 
-def main():
+def main(screen, is_playing):
     """
-    The main function initializes PyGame, sets the window title,
-    renders the start screen, and runs the main game loop until
-    the user clicks the exit button.
+    Render the start screen with the background image and the title and buttons.
+    Returns the buttons for later use in the game loop.
 
-    It handles initializing PyGame, displaying the start screen,
-    tracking game state, and cleaning up when the game exits.
+    Parameters:
+    - screen: Pygame screen surface.
+    - is_playing: Boolean indicating whether the game is currently in progress.
+
+    Returns:
+    Tuple: A tuple containing a list of all button instances and the exit button.
     """
-    pygame.init()
-
-    # This is like a header in HTMl
-    pygame.display.set_caption("Hangman (Daniel's CS50P Final Project)")
-
-    # Set screen size and alow the screen to be resizable
-    # (0, 0) means that the screen size will be set automatically
-    screen: pygame.Surface = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
-
     # Render the start screen with the background image and the title and buttons
     # Returns the buttons for later use in the game loop
-    # HACK: make it return just the button list without the exit button separately using return_button_clicked
-    all_button_instances, exit_button = start_screen.render_start_screen(screen)
+    all_button_instances, exit_button = start_screen.render_start_screen(
+        screen)
 
     # The Game loop. It will run until 'is_playing' is set to False. aka exit the game
     is_playing: bool = True
@@ -69,11 +63,14 @@ def main():
             you need to click the exit button twice to exit the game.
             One time to exit the game_logic loop and the second time to exit the main game loop.
             """
-            # For explanation of the IF statement read the docstring above ^^^^^
+            # ^^^^^ For explanation of the IF statement read the docstring above ^^^^^
             if button_name in level_names:
                 is_playing = hangman_game.game_logic(
                     screen, button_name, all_button_instances
                 )
+                for button in all_button_instances:
+                    if button.name == "Restart":
+                        button.clickable = True
             else:
                 # If the X button is clicked, the game will exit
                 is_playing = game_loop.exit_game(exit_button, event, mouse_pos)
@@ -81,9 +78,8 @@ def main():
         # Updating the screen each time we change something
         pygame.display.update()
 
-    # Outside the loop, when the game is supposed to end
-    print("Thank you for playing Hangman!")
-    pygame.quit()
+    is_playing = False
+    return is_playing
 
 
 def button_clicked(all_button_instances: list[pygame.Rect], mouse_pos) -> str:
@@ -102,7 +98,8 @@ def button_clicked(all_button_instances: list[pygame.Rect], mouse_pos) -> str:
     the name of the button that was clicked, as an integer. If no button is clicked, it returns None.
     """
     # Filter out non-clickable buttons before the loop
-    clickable_buttons = [button for button in all_button_instances if button.clickable]
+    clickable_buttons = [
+        button for button in all_button_instances if button.clickable]
 
     # Get the list of all mouse button pressed.
     # [0] is the left mouse button, [1] is the middle mouse button, [2] is the right mouse button.
@@ -119,13 +116,74 @@ def button_clicked(all_button_instances: list[pygame.Rect], mouse_pos) -> str:
         return None
 
 
-def guess_letter(letter: chr, word):
-    ...
+def get_button_instance(button_name: str, all_button_instances: list[pygame.Rect]):
+    """
+    Returns the instance of a button with a specific name from a list of button instances.
+
+    Args:
+        button_name (str): The name of the button to retrieve the instance for.
+        all_button_instances (list[pygame.Rect]): A list of all button instances.
+
+    Returns:
+        pygame.Rect: The instance of the button with the specified name. If no button with the specified name is found, None is returned.
+    """
+    # Goes over all the buttons in the list
+    for button in all_button_instances:
+        # If the button.name matches the button_name, it will return the button
+        if button.name == button_name:
+            return button
 
 
-def function_n():
-    ...
+def exit_or_restart(screen, is_playing, all_button_instances: list[pygame.Rect]):
+    """
+    Determines whether the user wants to exit the game or restart it based on the button clicked.
+
+    Args:
+    - all_button_instances: a list of `pygame.Rect` objects representing the bounding rectangles of all the buttons on the screen.
+
+    Returns:
+    - is_playing: a boolean indicating whether the game is still in progress.
+    """
+    # Check if the game should exit
+    if button_clicked == "Exit":
+        is_playing = False
+    
+    # Check if the game should restart
+    if button_clicked(all_button_instances, pygame.mouse.get_pos()) == "Restart":
+        # Make all the buttons unclickable
+        for button in all_button_instances:
+            button.clickable = False
+        is_playing = main(screen, is_playing)
+
+    # Return if the game should continue to run or not
+    return is_playing
 
 
 if __name__ == "__main__":
-    main()
+    """
+    Initializes the Pygame library, sets the caption for the game window, creates a resizable game window, and starts the game loop.
+
+    Inputs: None
+    Outputs: None
+    """
+
+    # Initialize pygame
+    pygame.init()
+
+    # Initialize pygame playing sound
+    pygame.mixer.init()
+    # This is like a header in HTMl
+    pygame.display.set_caption("Hangman (Daniel's CS50P Final Project)")
+
+    # Set screen size and alow the screen to be resizable
+    # (0, 0) means that the screen size will be set automatically
+    screen: pygame.Surface = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
+    
+    is_playing = True
+    
+    while is_playing:
+        is_playing = main(screen, is_playing)
+
+    # Outside the loop, when the game is supposed to end
+    print("Thank you for playing Hangman!")
+    pygame.quit()

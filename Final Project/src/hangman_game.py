@@ -11,16 +11,19 @@ from classes.word import Word
 from src import hangman_game
 from src import game_screen
 from src import game_loop
+from sounds import play_sound
 import project
 
 
-def game_logic(screen, level, all_button_instances):
+def game_logic(screen, level, all_button_instances) -> bool:
     # Make all the buttons from the main screen unclickable in the game screen
     change_main_screen_button_clickability(all_button_instances)
 
     # Count how many attempts the user has made
     # Max 7 attempts till the game is over
     hangman_attempts = 0
+    
+    play_sound.game_start()
 
     # Create the word class
     word = get_word_cls(level)
@@ -42,6 +45,11 @@ def game_logic(screen, level, all_button_instances):
 
             # If mouse hovers, it will change the cursor to a pointing hand
             game_loop.mouse_when_over_button(all_button_instances, mouse_pos)
+        
+        button_clicked = project.button_clicked(all_button_instances, mouse_pos)
+        
+        # Code that runs when the Restart or Exit buttons are clicked
+        is_playing = project.exit_or_restart(screen, is_playing, all_button_instances)
 
         # When a letter button was clicked, guess_letters will check if the guessed letter is in the word.
         # If it is, word.guessed_letters_index is changed to True in the corresponding index.
@@ -55,7 +63,9 @@ def game_logic(screen, level, all_button_instances):
 
         # Update the screen once after processing events
         pygame.display.update()
-    return is_playing
+        for button in all_button_instances:
+                    if button.name == "Restart" or button.name == "Exit":
+                        button.clickable = True
 
 
 def change_main_screen_button_clickability(
@@ -117,7 +127,7 @@ def guess_letter(
     is_guessed: bool = False
 
     # Get the button instance
-    button = get_button_instance(button_name, all_button_instances)
+    button = project.get_button_instance(button_name, all_button_instances)
 
     if button is not None and button.letter_button_clicked is False:
         if button_name is not None and button_name != "Exit":
@@ -132,9 +142,16 @@ def guess_letter(
                     # Make the letter visible in the masked word
                     word.guessed_letters_index[i] = True
                     is_guessed = True
+                    
+                    play_sound.correct_answer()
 
             if is_guessed is False:
                 hangman_attempts += 1
+                
+                # Play only if there are attempts left.
+                # This is done, so in the event of GAME OVER, just the game over sound will play and not both.
+                if hangman_attempts < 7:
+                    play_sound.wrong_answer()
 
             # Indicates that the letter was guessed
             try_guessing = True
@@ -142,14 +159,6 @@ def guess_letter(
             game_screen.render_v_or_x_image(screen, button, "x")
 
     return try_guessing, hangman_attempts
-
-
-def get_button_instance(button_name: str, all_button_instances: list[pygame.Rect]):
-    # Goes over all the buttons in the list
-    for button in all_button_instances:
-        # If the button.name matches the button_name, it will return the button
-        if button.name == button_name:
-            return button
 
 
 def update_the_hangman(
@@ -163,9 +172,19 @@ def update_the_hangman(
         exit_button = game_screen.render_game_screen(
             word, all_button_instances, screen, hangman_attempts
         )
+    # If the user has guessed ALL the letters
+    if False not in word.guessed_letters_index:
+        play_sound.yay()
 
     # If no more attempts are left, the game is over
     if hangman_attempts >= 7:
+        # Make the whole word visible
+        for i in range(len(word.word)):
+            word.guessed_letters_index[i] = True
+        
+        play_sound.game_over()
+        
+        # Rerender the screen
         exit_button = game_screen.render_game_screen(
             word, all_button_instances, screen, hangman_attempts
         )
