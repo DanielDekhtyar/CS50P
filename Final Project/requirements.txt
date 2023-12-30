@@ -1,6 +1,5 @@
 pygame
 csv
 sys
-os
 random
 string
