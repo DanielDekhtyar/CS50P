@@ -1,5 +1,1 @@
 pygame
-csv
-sys
-random
-string
