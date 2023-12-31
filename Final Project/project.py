@@ -10,161 +10,136 @@ LinkedIn : https://www.linkedin.com/in/daniel-dekhtyar/
 GitHub : https://github.com/DanielDekhtyar
 """
 
+from typing import Tuple
 
 import pygame
 
 from src import start_screen
 from src import game_loop
 from src import hangman_game
+from utils import util_functions
+from classes.word import Word
+from classes.button import Button
 
 
-def main(screen, is_playing):
+def main(screen: pygame.Surface, is_playing: bool) -> bool:
     """
-    Render the start screen with the background image and the title and buttons.
-    Returns the buttons for later use in the game loop.
-
-    Parameters:
-    - screen: Pygame screen surface.
-    - is_playing: Boolean indicating whether the game is currently in progress.
-
+    The main function controls the flow of the game by rendering the start screen, handling button
+    clicks, and calling the hangman game logic.
+    
+    Args:
+    screen: The screen parameter is the Pygame surface object that represents the game window. It is
+    used to render and update the game graphics.
+    is_playing: A boolean variable that indicates whether the game is currently being played or not.
+    
     Returns:
-    Tuple: A tuple containing a list of all button instances and the exit button.
+    the value of the variable "is_playing", which is a boolean value.
     """
-    # Render the start screen with the background image and the title and buttons
-    # Returns the buttons for later use in the game loop
-    all_button_instances, exit_button = start_screen.render_start_screen(
-        screen)
+    # Render the main screen of the game where you can choose the level
+    all_button_instances, exit_button = start_screen.render_start_screen(screen)
 
-    # The Game loop. It will run until 'is_playing' is set to False. aka exit the game
-    is_playing: bool = True
-
-    # The main game loop
+    # The main game loop. If is_playing is False the game will quit.
     while is_playing:
-        # Mouse position determined at the start of the game loop to save computer resources.
-        # Otherwise, the pygame.mouse.get_pos() function would be called in every function.
-        mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
-
-        # Making pointing hand cursor when hovering over a button
+        # Get the current mouse position
+        mouse_pos: list[int, int, int] = pygame.mouse.get_pos()
+        
+        # Check if the mouse hovers over any of the buttons.
+        # If so the mouse pointer will be set to a pointy hand
         game_loop.mouse_when_over_button(all_button_instances, mouse_pos)
+        
+        # Get the button.name of the button that was clicked.
+        # If no button was clicked, None will be returned
+        button_name: str = util_functions.button_clicked(all_button_instances, mouse_pos)
+        
+        # A set of the button.names of the level buttons.
+        # On the screen you will see them as Easy, Medium, Hard, Very Hard
+        level_names: dict[str] = {"Level 1", "Level 2", "Level 3", "Level 4"}
+        
+        """
+        If one of the level buttons is clicked, the game will start the level.
+        When the exit button on the game screen is clicked, game_logic will return False,
+        The game loop will stop and the game will exit
 
-        # Get the name of the button that was clicked. If no button clicked, it gets None
-        button_name = button_clicked(all_button_instances, mouse_pos)
-
-        # Create a set of all the names of the level buttons
-        level_names = {"Level 1", "Level 2", "Level 3", "Level 4"}
+        The If Else statement is written in the way that it does because otherwise
+        you need to click the exit button twice to exit the game.
+        One time to exit the game_logic loop and the second time to exit the main game loop.
+        """
+        # ^^^^^ For explanation of the IF statement read the docstring above ^^^^^
+        if button_name in level_names:
+            # Start the level and move to the game screen
+            is_playing = hangman_game.game_logic(screen, button_name, all_button_instances)
 
         for event in pygame.event.get():
-            """
-            If one of the level buttons is clicked, the game will start the level.
-            When the exit button on the game screen is clicked, game_logic will return False,
-            The game loop will stop and the game will exit
+            is_playing = game_loop.exit_game(exit_button, event, mouse_pos)
 
-            The If Else statement is written in the way that it does because otherwise
-            you need to click the exit button twice to exit the game.
-            One time to exit the game_logic loop and the second time to exit the main game loop.
-            """
-            # ^^^^^ For explanation of the IF statement read the docstring above ^^^^^
-            if button_name in level_names:
-                is_playing = hangman_game.game_logic(
-                    screen, button_name, all_button_instances
-                )
-                for button in all_button_instances:
-                    if button.name == "Restart":
-                        button.clickable = True
-            else:
-                # If the X button is clicked, the game will exit
-                is_playing = game_loop.exit_game(exit_button, event, mouse_pos)
-
-        # Updating the screen each time we change something
         pygame.display.update()
 
     is_playing = False
     return is_playing
 
 
-def button_clicked(all_button_instances: list[pygame.Rect], mouse_pos) -> str:
+def is_letter_guessed(word: Word, button: Button):
     """
-    The function `button_clicked` checks if a button was clicked and returns the name of
-    the button, otherwise it returns None.
-
-    Args:
-    all_button_instances (list[pygame.Rect]): The parameter `all_button_instances` is a list of
-    `pygame.Rect` objects representing the bounding rectangles of all the buttons on the screen. Each
-    `pygame.Rect` object contains the coordinates and dimensions of a button.
-    mouse_pos: The parameter `mouse_pos` represents the current position of the mouse on the screen.
-    It is expected to be a tuple containing the x and y coordinates of the mouse position.
-
-    Returns:
-    the name of the button that was clicked, as an integer. If no button is clicked, it returns None.
-    """
-    # Filter out non-clickable buttons before the loop
-    clickable_buttons = [
-        button for button in all_button_instances if button.clickable]
-
-    # Get the list of all mouse button pressed.
-    # [0] is the left mouse button, [1] is the middle mouse button, [2] is the right mouse button.
-    mouse_click: list[int] = pygame.mouse.get_pressed()
-
-    # Iterate over clickable buttons and check if the mouse is over any of them
-    for button in clickable_buttons:
-        if button.collidepoint(mouse_pos):
-            if mouse_click[0] == 1:
-                return button.name
-
-    # If no button is clicked, return None
-    else:
-        return None
-
-
-def get_button_instance(button_name: str, all_button_instances: list[pygame.Rect]):
-    """
-    Returns the instance of a button with a specific name from a list of button instances.
-
-    Args:
-        button_name (str): The name of the button to retrieve the instance for.
-        all_button_instances (list[pygame.Rect]): A list of all button instances.
-
-    Returns:
-        pygame.Rect: The instance of the button with the specified name. If no button with the specified name is found, None is returned.
-    """
-    # Goes over all the buttons in the list
-    for button in all_button_instances:
-        # If the button.name matches the button_name, it will return the button
-        if button.name == button_name:
-            return button
-
-
-def exit_or_restart(screen, is_playing, all_button_instances: list[pygame.Rect]):
-    """
-    Determines whether the user wants to exit the game or restart it based on the button clicked.
-
-    Args:
-    - all_button_instances: a list of `pygame.Rect` objects representing the bounding rectangles of all the buttons on the screen.
-
-    Returns:
-    - is_playing: a boolean indicating whether the game is still in progress.
-    """
-    # Check if the game should exit
-    if button_clicked == "Exit":
-        is_playing = False
+    The function checks if a letter guessed by the player is present in the word and updates the
+    guessed_letters_index accordingly.
     
-    # Check if the game should restart
-    if button_clicked(all_button_instances, pygame.mouse.get_pos()) == "Restart":
-        # Make all the buttons unclickable
-        for button in all_button_instances:
-            button.clickable = False
-        is_playing = main(screen, is_playing)
+    Args:
+    word (Word): The parameter "word" is of type "Word", which is likely a custom class representing a
+    word in a game or some other context. It probably has properties like "word" (the actual word), and
+    "guessed_letters_index" (a list or array indicating which letters have been guessed correctly
+    button (Button): The `button` parameter is an object of the `Button` class. It represents the
+    button that was clicked or pressed by the user.
+    
+    Returns:
+    a boolean value indicating whether the guessed letter is present in the word.
+    """
+    # Initialize to False initially
+    is_guessed = False
+    
+    for i, char in enumerate(word.word):
+        # If the letter that was guessed is in the word, change the guessed_letters_index to True
+        if char == button.name:
+            # Make the letter visible in the masked word
+            word.guessed_letters_index[i] = True
+            is_guessed = True
+            
+    return is_guessed
 
-    # Return if the game should continue to run or not
-    return is_playing
+
+# Make restart and exit buttons clickable
+def make_restart_and_exit_clickable(all_button_instances: list[Button]):
+    """
+    The function makes the "Restart" and "Exit" buttons clickable by setting their clickable attribute
+    to True.
+    
+    Args:
+    all_button_instances (list[Button]): A list of Button instances.
+    """
+    for button in all_button_instances:
+            if button.name == "Restart" or button.name == "Exit":
+                button.clickable = True
+
+
+def make_all_main_screen_button_unclickable(all_button_instances: list[pygame.Rect],) -> None:
+    """
+    The function makes all the buttons from the main screen unclickable.
+    
+    Args:
+    all_button_instances (list[pygame.Rect]): A list of instances of the pygame.Rect class
+    representing all the buttons on the main screen.
+    """
+    # Make all the buttons from the main screen unclickable
+    for button in all_button_instances:
+        button.clickable = False
 
 
 if __name__ == "__main__":
     """
-    Initializes the Pygame library, sets the caption for the game window, creates a resizable game window, and starts the game loop.
+    Initializes the Pygame library, sets the caption for the game window, creates a resizable
+    game window, and starts the game loop.
 
-    Inputs: None
-    Outputs: None
+    Inputs: The game starts running from here
+    Outputs: The game exits here when is_playing is set to False.
     """
 
     # Initialize pygame
@@ -179,11 +154,13 @@ if __name__ == "__main__":
     # (0, 0) means that the screen size will be set automatically
     screen: pygame.Surface = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
     
+    # A boolean variable that tracks if the game is still playing
+    # When is_playing is set to False, the game will exit
     is_playing = True
     
     while is_playing:
         is_playing = main(screen, is_playing)
 
-    # Outside the loop, when the game is supposed to end
+    # Exit the game
     print("Thank you for playing Hangman!")
     pygame.quit()

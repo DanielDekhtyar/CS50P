@@ -1,8 +1,18 @@
 """
-This file contains the code for the start screen of the game.
-The functions are called to render different elements of the start screen.
-"""
+The `render_start_screen` function renders the start screen of a game, including the background
+image, title, level buttons, and exit button, and returns the list of all button instances and the
+exit button for later use in the game loop.
 
+Args:
+screen: The `screen` parameter is a `pygame.Surface` object that represents the game window or
+screen where the elements will be rendered.
+
+Returns:
+The function `render_start_screen` returns a tuple containing two elements:
+1. `all_button_instances`: a list of all the buttons (Button class instances) in the game.
+2. `exit_button`: a pygame.Rect object representing the exit button on the top right corner of the
+screen.
+"""
 
 import pygame
 
@@ -10,18 +20,24 @@ from font import set_font
 from classes.button import Button
 
 
-def render_start_screen(screen) -> tuple[list[pygame.Rect], pygame.Rect]:
+def render_start_screen(screen: pygame.Surface) -> tuple[list[Button], Button]:
     """
-    The function `render_start_screen` renders the start screen of a game, including the title, level
-    buttons, and exit button, and returns the button instances for later use in the game loop.
-
+    The function `render_start_screen` renders the start screen of a game, including the background
+    image, title, level buttons, and exit button, and returns the list of all button instances and the
+    exit button for later use in the game loop.
+    
+    Args:
+    screen: The screen parameter is the surface object representing the game window or screen where
+    the elements will be rendered.
+    
     Returns:
-    a tuple containing two elements. The first element is a list of pygame.Rect objects representing
-    the level buttons in the game. The second element is a pygame.Rect object representing the X button on the
-    top right corner of the screen.
+    The function `render_start_screen` returns a tuple containing two elements:
+    1. `all_button_instances`: a list of all the buttons (Button class instances) in the game.
+    2. `exit_button`: a pygame.Rect object representing the exit button on the top right corner of the
+    screen.
     """
     # A list of all the buttons (Button class instances) in the game
-    all_button_instances = []
+    all_button_instances: list[Button] = []
 
     # Render the screen and the background image
     render_bg(screen)
@@ -47,11 +63,15 @@ def render_start_screen(screen) -> tuple[list[pygame.Rect], pygame.Rect]:
     return all_button_instances, exit_button
 
 
-def render_bg(screen) -> pygame.Surface:
+def render_bg(screen: pygame.Surface) -> None:
     """
-    The `render_screen` function sets up the screen size, loads a background image, and renders it on
-    the screen.
-
+    The `render_bg` function sets up the screen size, loads a background image, and renders it on the
+    screen.
+    
+    Args:
+    screen: The `screen` parameter is a pygame.Surface object that represents the screen on which the
+    background image will be rendered.
+    
     Returns:
     a pygame.Surface object, which represents the screen that has been rendered.
     """
@@ -76,22 +96,21 @@ def render_bg(screen) -> pygame.Surface:
     # Draw the background image.(0, 0) the image will render at the top left corner of the screen
     screen.blit(bg_image, (0, 0))
 
-    return screen
 
-
-def render_title(screen: pygame) -> pygame.Rect:
+def render_title(screen: pygame.Surface) -> pygame.Rect:
     """
-    The function `render_title` renders the title "Hangman" on the screen and returns the rectangle
-    object representing the position of the rendered text.
-
+    The function `render_title` renders and positions a title text on the screen using the Pygame
+    library.
+    
     Args:
     screen (pygame): The `screen` parameter is a pygame surface object that represents the screen or
     window on which the title will be rendered.
-
+    
     Returns:
-    a pygame.Rect object that represents the position and size of the rendered title text on the
-    screen.
+    a pygame.Rect object, which represents the rectangular area occupied by the rendered title text on
+    the screen.
     """
+
     # Set the percentage of the screen that the title will occupy
     title_font_percentage = 0.13
 
@@ -125,16 +144,17 @@ def render_title(screen: pygame) -> pygame.Rect:
 
 def render_buttons(screen: pygame.Surface, title_rect: pygame.Rect) -> tuple[Button]:
     """
-    The `render_buttons` function loads and sizes level button images, instantiates button objects, sets
-    their positions, draws them on the screen, and returns the button objects.
-
+    The `render_buttons` function takes a screen surface and a title rectangle as input, loads and sizes
+    level button images, instantiates button objects, sets their positions, draws them on the screen,
+    and returns the button objects.
+    
     Args:
     screen (pygame.Surface): The `screen` parameter is a `pygame.Surface` object representing the game
     window or screen on which the buttons will be rendered.
     title_rect (pygame.Rect): The `title_rect` parameter is a `pygame.Rect` object that represents the
-    rectangle area where the title of the screen is displayed. It is used to calculate the position of
+    rectangle area where the title of the screen is rendered. It is used to calculate the position of
     the buttons relative to the title.
-
+    
     Returns:
     The function `render_buttons` returns a tuple containing the four `Button` objects:
     `level_1_button`, `level_2_button`, `level_3_button`, and `level_4_button`.
@@ -194,7 +214,7 @@ def render_buttons(screen: pygame.Surface, title_rect: pygame.Rect) -> tuple[But
     return level_1_button, level_2_button, level_3_button, level_4_button
 
 
-def render_exit_button(screen: pygame.Surface) -> pygame.Rect:
+def render_exit_button(screen: pygame.Surface) -> Button:
     """
     The function `render_X_button` renders an exit button on the screen using an image and returns the
     rectangle of the button for later use.

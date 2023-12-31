@@ -1,25 +1,34 @@
 """
-game_loop.py contains the functions for the main game loop of the game.
+The `exit_game` function checks if the user has clicked the in-game X button, pressed the ESC key,
+or exited the app using Alt+F4 or the X button, and returns `False` if any of these conditions are
+met, indicating that the game should exit.
+
+Args:
+all_button_instances: `all_button_instances` is a list of all the button instances in the current
+scene or screen. Each button instance should have a `collidepoint` method to check if the mouse is
+over the button and a `clickable` attribute to determine if the button is active or clickable.
+mouse_pos (tuple[int, int]): The `mouse_pos` parameter is a tuple containing the x and y
+coordinates of the mouse cursor on the screen. It is used to determine the position of the mouse
+when checking if it is over a button or the X button.
 """
 
 import pygame
-
-import project
-from src import game_screen
-from src import hangman_game
+from classes.button import Button
 
 
 # Making pointing hand cursor when hovering over a button
-def mouse_when_over_button(all_button_instances, mouse_pos: tuple[int, int]):
+def mouse_when_over_button(all_button_instances: list[Button], mouse_pos: tuple[int, int]) -> None:
     """
-    The function `mouse_when_over_button` checks if the mouse is over any active button
-    and changes the cursor type accordingly.
-
+    The function `mouse_when_over_button` checks if the mouse is over any active button and changes the
+    cursor type accordingly.
+    
     Args:
-    all_button_instances: all_button_instances is a list that contains instances of
-    all the buttons in the game.
+    all_button_instances: all_button_instances is a list of all the button instances in the current
+    scene or screen. Each button instance should have a `collidepoint` method to check if the mouse is
+    over the button and a `clickable` attribute to determine if the button is active or clickable.
+    mouse_pos (tuple[int, int]): The mouse_pos parameter is a tuple containing the x and y coordinates
+    of the mouse cursor on the screen.
     """
-
     # Default the cursor to arrow cursor
     cursor_type = pygame.SYSTEM_CURSOR_ARROW
 
@@ -36,25 +45,30 @@ def mouse_when_over_button(all_button_instances, mouse_pos: tuple[int, int]):
 
 
 def exit_game(
-    X_button_rect: pygame.Rect, event: pygame.event, mouse_pos: tuple[int, int]
+    X_button_rect: pygame.Rect,
+    event: pygame.event,
+    mouse_pos: tuple[int, int]
 ) -> bool:
     """
-    The `exit_game` function checks if the X button or the ESC key is pressed to exit the game.
-
+    The `exit_game` function checks if the user has clicked the in-game X button, pressed the ESC key,
+    or exited the app using Alt+F4 or the X button, and returns `False` if any of these conditions are
+    met, indicating that the game should exit.
+    
     Args:
-    X_button_rect (pygame.Rect): The X_button_rect parameter is a pygame.Rect object that represents
-    the rectangular area of the X button in the game. It is used to check if the mouse is hovering
-    over the X button and if the X button is clicked.
-    event (pygame.event): The `event` parameter is an instance of the `pygame.event.Event` class. It
-    represents an event that has occurred in the game, such as a mouse click or a key press.
-
+    X_button_rect (pygame.Rect): The `X_button_rect` parameter is a `pygame.Rect` object that
+    represents the rectangular area of the X button in the game. It is used to check if the mouse is
+    hovering over the X button.
+    event (pygame.event): The `event` parameter is a `pygame.event` object that represents an event
+    that occurred in the game. This could be a mouse click, a key press, or any other type of event that
+    the game is programmed to handle.
+    mouse_pos (tuple[int, int]): The `mouse_pos` parameter is a tuple containing the x and y
+    coordinates of the mouse cursor on the screen.
+    
     Returns:
-    a boolean value indicating whether the game should continue playing or not. If the game is
-    exited (either by clicking the X button, pressing the ESC key, or triggering the QUIT event),
-    the function returns False. Otherwise, it returns True to indicate that
-    the game should continue playing.
+    The function `exit_game` returns a boolean value. If the game is not exited (i.e., the user did
+    not click the X button, press the ESC key, or exit the app using Alt+F4), it returns `True`.
+    Otherwise, if the game is exited, it returns `False`.
     """
-
     # Check if the mouse is over the button
     is_hovering: int = X_button_rect.collidepoint(mouse_pos)
 

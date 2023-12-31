@@ -1,12 +1,11 @@
 """
-When ever a specific sound needed to be played, you can use the following code: play_sound.your_sound_name()
-Don't forget to import the play_sound module in the file.
+The code defines several functions that play different sounds using pygame.mixer.
 """
 
 import pygame.mixer
 
 
-def correct_answer():
+def correct_answer() -> None:
     # Load the sound
     correct_answer_sound = pygame.mixer.Sound("CS50P/Final Project/sounds/correct answer.mp3")
 
@@ -15,9 +14,11 @@ def correct_answer():
     
     # Play the sound
     correct_answer_sound.play()
+    
+    return
 
 
-def wrong_answer():
+def wrong_answer() -> None:
     # Load the sound
     wrong_answer_sound = pygame.mixer.Sound("CS50P/Final Project/sounds/wrong answer.mp3")
 
@@ -26,9 +27,11 @@ def wrong_answer():
     
     # Play the sound
     wrong_answer_sound.play()
+    
+    return
 
 
-def yay():
+def yay() -> None:
     # Load the sound
     game_win_sound = pygame.mixer.Sound("CS50P/Final Project/sounds/yay.mp3")
     
@@ -37,9 +40,11 @@ def yay():
 
     # Play the sound
     game_win_sound.play()
+    
+    return
 
 
-def game_over():
+def game_over() -> None:
     # Load the sound
     game_over_sound = pygame.mixer.Sound("CS50P/Final Project/sounds/game over.mp3")
     
@@ -48,9 +53,11 @@ def game_over():
 
     # Play the sound
     game_over_sound.play()
+    
+    return
 
 
-def game_start():
+def game_start() -> None:
     # Load the sound
     game_start_sound = pygame.mixer.Sound("CS50P/Final Project/sounds/game start.mp3")
     
@@ -59,3 +66,5 @@ def game_start():
 
     # Play the sound
     game_start_sound.play()
+    
+    return
