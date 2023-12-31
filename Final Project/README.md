@@ -12,20 +12,43 @@
 
 ## 📝 Changelog:
 
-> ### Last Version : 0.9.9 release candidate
+> ### Last Version : 1.0.0
 >
-> ### Last Update : 28-12-2023
+> ### Last Update : 31-12-2023
 >
 > _Date format DD-MM-YYYY_
 
-### 🗓️ _Version 0.9.9 release candidate - 28-12-2023 (latest commit)_
+
+### 🗓️ _Version 1.0.0 - 31-12-2023 (latest commit)_ Happy new 2024 year 🎄🎇✨
+
+---
+
+#### 🚀 Added
+- `is_letter_guessed()` added in `project.py`. The function is called by `guess_letter()` in `hangman_game.py`.  
+If the letter was guessed correctly, the function will return True, otherwise, the function will return False.
+- `make_restart_and_exit_clickable()` added in `pygame.py`. It is called by `game_logic()` in `hangman_game.py`.  
+This function ensures that the Exit and Restart buttons are clickable on the game screen. This helps to solve a bug.
+- `make_all_main_screen_button_unclickable()` added in `project.py`. The function is called by `guess_letter()` in `hangman_game.py`.  
+When the game screen starts, it makes all the buttons on the main screen unclickable. Otherwise, you can click on their rect on another screen.
+
+
+#### 🔥 Enhancements
+- `button_clicked()` and `get_button_instance()` moved to a new file called `util_functions.py` inside the `utils` folder.
+- Comments, docstring and type annotations were added all over the code.
+
+#### 🛠️ Fixed
+- The dimensions of the buttons in `render_letter_buttons()` in `game_screen.py` are not longer defined by a specific number but a percentage, meaning now  
+the size of the buttons will look the same (proportionally) on all screen sizes. `render_v_or_x_image()` changed accordingly.
+
+
+### 🗓️ _Version 0.9.9 release candidate - 28-12-2023 (commit a6e5516)_
 
 ---
 
 #### 🚀 Added
 - In the `project.py` in `if __name__ == "__main__"` a big change was made.
   - All the code that happens only once during the game initialization is now inside the `if __name__ == "__main__"` block.  
-  Examples of this is `pygame.init()`, `pygame.display.set_caption`, screen initialization and `pygame.quit()`
+  Examples of this are `pygame.init()`, `pygame.display.set_caption`, screen initialization and `pygame.quit()`
   This was done to make level restarts passable.  
   `main()` is called to start a new level but all the things like pygame initialization and screen creation are done only once.
 - In `project.py`, `get_button_instance()` returns the Button instance given the name of the button.
