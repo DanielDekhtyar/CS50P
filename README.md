@@ -1,5 +1,5 @@
 # CS50P
-### All my code assignments from CS50's introduction to Python
+### All my code assignments for CS50’s Introduction to Programming with Python
 ![CS50 Duck Debugger](https://cs50.gallerycdn.vsassets.io/extensions/cs50/ddb50/1.1.2/1691002683906/Microsoft.VisualStudio.Services.Icons.Default)
 
 > Email : denik2707@gmail.com  
