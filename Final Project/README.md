@@ -37,7 +37,7 @@ When the game screen starts, it makes all the buttons on the main screen unclick
 - Comments, docstring and type annotations were added all over the code.
 
 #### 🛠️ Fixed
-- The dimensions of the buttons in `render_letter_buttons()` in `game_screen.py` are not longer defined by a specific number but a percentage, meaning now  
+- The dimensions of the buttons in `render_letter_buttons()` in `game_screen.py` are no longer defined by a specific number but a percentage, meaning now  
 the size of the buttons will look the same (proportionally) on all screen sizes. `render_v_or_x_image()` changed accordingly.
 
 
