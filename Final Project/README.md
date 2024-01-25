@@ -3,6 +3,7 @@
 ![CS50 Duck Debugger](https://cs50.gallerycdn.vsassets.io/extensions/cs50/ddb50/1.1.2/1691002683906/Microsoft.VisualStudio.Services.Icons.Default)
 
 ---
+## To play the game, run `project.py`
 
 ### _This is my final project for the [CS50P course](https://cs50.harvard.edu/python/2022/) at Harvard Online_
 
