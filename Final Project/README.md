@@ -19,7 +19,7 @@
 > _Date format DD-MM-YYYY_
 
 
-### 🗓️ _Version 1.0.0 - 31-12-2023 (latest commit)_ Happy new 2024 year 🎄🎇✨
+### 🗓️ _Version 1.0.0 - 31-12-2023 ([commit 993f36a](https://github.com/DanielDekhtyar/CS50P/commit/993f36a))_ Happy new 2024 year 🎄🎇✨
 
 ---
 
@@ -41,7 +41,7 @@ When the game screen starts, it makes all the buttons on the main screen unclick
 the size of the buttons will look the same (proportionally) on all screen sizes. `render_v_or_x_image()` changed accordingly.
 
 
-### 🗓️ _Version 0.9.9 release candidate - 28-12-2023 (commit a6e5516)_
+### 🗓️ _Version 0.9.9 release candidate - 28-12-2023 ([commit a6e5516](https://github.com/DanielDekhtyar/CS50P/commit/a6e5516))_
 
 ---
 
@@ -64,7 +64,7 @@ the size of the buttons will look the same (proportionally) on all screen sizes.
 e.g `level 1.png` -> `easy.png` etc.
 
 
-### 🗓️ _Version 0.9.2 - 26-12-2023 (commit 3d8ccb6)_
+### 🗓️ _Version 0.9.2 - 26-12-2023 ([commit 3d8ccb6](https://github.com/DanielDekhtyar/CS50P/commit/3d8ccb6))_
 
 ---
 
@@ -83,7 +83,7 @@ If more than 7 failed attempts are made, the game will end.
 Also, it will make all the buttons, except the exit button, unclickable.
 
 
-### 🗓️ _Version 0.9.1 - 26-12-2023 (commit f98a664)_
+### 🗓️ _Version 0.9.1 - 26-12-2023 ([commit f98a664](https://github.com/DanielDekhtyar/CS50P/commit/f98a664))_
 
 ---
 
@@ -112,7 +112,7 @@ It returns the instance of a Button class based on the button name(this_button.n
 - In `game_screen.py`, `render_letter_buttons()` type annotations changed from `-> tuple[Button]` to `-> None`.
 
 
-### 🗓️ _Version 0.9.0 - 25-12-2023 (commit 3c5b924)_
+### 🗓️ _Version 0.9.0 - 25-12-2023 ([commit 3c5b924](https://github.com/DanielDekhtyar/CS50P/commit/3c5b924))_
 
 ---
 
@@ -142,7 +142,7 @@ It was done to suit better the new font.
   - It was caused by `screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE)` being placed inside `render_start_screen()` in `start_screen`, so the screen was created each time this function was called.  
   Now `screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE)` is called once at the start of `main()`.
 
-### 🗓️ _Version 0.2.5 - 25-12-2023 (commit 91293f4)_
+### 🗓️ _Version 0.2.5 - 25-12-2023 ([commit 91293f4](https://github.com/DanielDekhtyar/CS50P/commit/91293f4))_
 
 ---
 
@@ -162,7 +162,7 @@ It was done to suit better the new font.
     It was mistakenly set to -> int.
   - `mouse_click = pygame.mouse.get_pressed()` is out of the for loop, otherwise it would be called every time the loop iterates.
 
-### 🗓️ _Version 0.2.0 - 24-12-2023 (commit ee4ce10)_
+### 🗓️ _Version 0.2.0 - 24-12-2023 ([commit ee4ce10](https://github.com/DanielDekhtyar/CS50P/commit/ee4ce10))_
 
 ---
 
@@ -197,7 +197,7 @@ It was done to suit better the new font.
 - button instance clickability now can be changed using getters and setters `my_button.clickable`.
 - `is_clickable()` property deleted as it is no longer needed thanks to the new `clickable` attribute.
 
-### 🗓️ _Version 0.1.2.1 - 15-12-2023 (commit 99ad8ab)_
+### 🗓️ _Version 0.1.2.1 - 15-12-2023 ([commit 99ad8ab](https://github.com/DanielDekhtyar/CS50P/commit/99ad8ab))_
 
 ---
 
@@ -211,7 +211,7 @@ It was done to suit better the new font.
 
 - Objects on the screen scale according to the device screen size and not a fixed number.
 
-### 🗓️ _Version 0.1.2 - 13-12-2023 (commit a08d2e3)_
+### 🗓️ _Version 0.1.2 - 13-12-2023 ([commit a08d2e3](https://github.com/DanielDekhtyar/CS50P/commit/a08d2e3))_
 
 ---
 
@@ -250,7 +250,7 @@ It was done to suit better the new font.
   All you need to do is to ensure all the buttons are in the `all_button_instances[]` list.
 - Method comments changed to a new format
 
-### 🗓️ _Version 0.1.1 - 10-12-2023 (commit 449a3ad)_
+### 🗓️ _Version 0.1.1 - 10-12-2023 ([commit 449a3ad](https://github.com/DanielDekhtyar/CS50P/commit/449a3ad))_
 
 ---
 
@@ -258,7 +258,7 @@ It was done to suit better the new font.
 
 - Type annotations added to `project.py`, `game_loop.py`, `start_screen.py`
 
-### 🗓️ _Version 0.1.0 - 06-12-2023 (commit 556477f)_
+### 🗓️ _Version 0.1.0 - 06-12-2023 ([commit 556477f](https://github.com/DanielDekhtyar/CS50P/commit/556477f))_
 
 ---
 
