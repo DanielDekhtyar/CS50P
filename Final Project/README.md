@@ -9,15 +9,30 @@
 
 ### _You can find the final project instructions [here](https://cs50.harvard.edu/python/2022/project/)_
 
+### _The original repository is [here](https://github.com/DanielDekhtyar/CS50P/tree/main/Final%20Project)_
+
 ---
 
 ## 📝 Changelog:
 
-> ### Last Version : 1.0.0
+> ### Last Version : 1.0.1
 >
-> ### Last Update : 31-12-2023
+> ### Last Update : 26-01-2024
 >
 > _Date format DD-MM-YYYY_
+
+
+### 🗓️ _Version 1.0.1 - 26-01-2024 ([commit 5208b7b](https://github.com/DanielDekhtyar/Hangman-with-Pygame/commit/5208b7))_
+
+---
+#### 🚀 Added
+- `Hangman.exe` has been added so now you can easily run the game on any machine !!!
+- `resource_path.py` in `utils` folder is used to load images, fonts and sound to allow it to work properly as an exe file.
+
+#### 🔥 Enhancements
+- `game_screen.py`, `hangman_game.py`, `start_screen.py`, `play_sound.py` and `get_font.py` changed to take advantage of `resource_path.py`
+to make it passable to run as an exe file.
+
 
 
 ### 🗓️ _Version 1.0.0 - 31-12-2023 ([commit 993f36a](https://github.com/DanielDekhtyar/CS50P/commit/993f36a))_ Happy new 2024 year 🎄🎇✨
