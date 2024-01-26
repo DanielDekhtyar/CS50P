@@ -27,7 +27,7 @@
 ---
 #### 🚀 Added
 - `Hangman.exe` has been added so now you can easily run the game on any machine !!!
-- `resource_path.py` in `utils` folder is used to load images, fonts and sound to allow it to work properly as an exe file.
+- `resource_path.py` in `utils` folder is used to load images, fonts, sound and CSV files to allow it to work properly as an exe file.
 
 #### 🔥 Enhancements
 - `game_screen.py`, `hangman_game.py`, `start_screen.py`, `play_sound.py` and `get_font.py` changed to take advantage of `resource_path.py`
