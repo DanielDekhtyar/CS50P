@@ -1,6 +1,6 @@
 # **CS50P Final project 💪**
 
-![CS50 Duck Debugger](https://cs50.gallerycdn.vsassets.io/extensions/cs50/ddb50/1.1.2/1691002683906/Microsoft.VisualStudio.Services.Icons.Default)
+![CS50 Duck Debugger](<../CS50 Duck Debugger.png>)
 
 ---
 ## To play the game, run `Hangman.exe`
