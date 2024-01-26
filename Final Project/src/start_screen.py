@@ -16,6 +16,7 @@ screen.
 
 import pygame
 
+from utils.resource_path import resource_path
 from font import set_font
 from classes.button import Button
 
@@ -83,7 +84,7 @@ def render_bg(screen: pygame.Surface) -> None:
     screen_width, screen_height = screen.get_width(), screen.get_height()
 
     # Select the background image
-    bg_image_path: str = "CS50P/Final Project/images/background_image.png"
+    bg_image_path: str = resource_path("Hangman-with-Pygame/images/background_image.png")
 
     # Load the background image
     bg_image: pygame.Surface = pygame.image.load(bg_image_path)
@@ -160,11 +161,11 @@ def render_buttons(screen: pygame.Surface, title_rect: pygame.Rect) -> tuple[But
     `level_1_button`, `level_2_button`, `level_3_button`, and `level_4_button`.
     """
     # Load the level button images
-    image_folder_path: str = "CS50P/Final Project/images/level buttons/"
-    level_1_img: pygame.Surface = pygame.image.load(f"{image_folder_path}easy.png")
-    level_2_img: pygame.Surface = pygame.image.load(f"{image_folder_path}medium.png")
-    level_3_img: pygame.Surface = pygame.image.load(f"{image_folder_path}hard.png")
-    level_4_img: pygame.Surface = pygame.image.load(f"{image_folder_path}very hard.png")
+    image_folder_path: str = resource_path("Hangman-with-Pygame/images/level buttons/")
+    level_1_img: pygame.Surface = pygame.image.load(resource_path(f"{image_folder_path}easy.png"))
+    level_2_img: pygame.Surface = pygame.image.load(resource_path(f"{image_folder_path}medium.png"))
+    level_3_img: pygame.Surface = pygame.image.load(resource_path(f"{image_folder_path}hard.png"))
+    level_4_img: pygame.Surface = pygame.image.load(resource_path(f"{image_folder_path}very hard.png"))
 
     # Size the images
     image_width, image_height = int(screen.get_width() * 0.25), int(
@@ -227,8 +228,8 @@ def render_exit_button(screen: pygame.Surface) -> Button:
     the `rect` attribute of the `button` object.
     """
     # Load the image
-    image_folder_path: int = "CS50P/Final Project/images/"
-    image: pygame.Surface = pygame.image.load(f"{image_folder_path}exit button.png")
+    image_folder_path: int = resource_path("Hangman-with-Pygame/images/")
+    image: pygame.Surface = pygame.image.load(resource_path(f"{image_folder_path}exit button.png"))
 
     button_width = int(screen.get_width() * 0.03)
     button_height = int(screen.get_height() * 0.055)

@@ -15,6 +15,7 @@ import csv
 import random
 import pygame
 
+from utils.resource_path import resource_path
 from classes.word import Word
 from classes.button import Button
 from src import game_screen
@@ -127,7 +128,7 @@ def get_random_word(level: str) -> tuple[str, str]:
     """
     
     # Path where all the csv files with the words are located within the project
-    csv_path = f"CS50P/Final Project/data/{level}.csv"
+    csv_path = resource_path(resource_path(f"Hangman-with-Pygame/data/{level}.csv"))
 
     # Open the CSV file
     with open(csv_path, "r") as file:

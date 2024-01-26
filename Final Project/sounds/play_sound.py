@@ -3,11 +3,12 @@ The code defines several functions that play different sounds using pygame.mixer
 """
 
 import pygame.mixer
+from utils.resource_path import resource_path
 
 
 def correct_answer() -> None:
     # Load the sound
-    correct_answer_sound = pygame.mixer.Sound("CS50P/Final Project/sounds/correct answer.mp3")
+    correct_answer_sound = pygame.mixer.Sound(resource_path("Hangman-with-Pygame/sounds/correct answer.mp3"))
 
     # Set volume 40%
     correct_answer_sound.set_volume(0.4)
@@ -20,7 +21,7 @@ def correct_answer() -> None:
 
 def wrong_answer() -> None:
     # Load the sound
-    wrong_answer_sound = pygame.mixer.Sound("CS50P/Final Project/sounds/wrong answer.mp3")
+    wrong_answer_sound = pygame.mixer.Sound(resource_path("Hangman-with-Pygame/sounds/wrong answer.mp3"))
 
     # Set volume 50%
     wrong_answer_sound.set_volume(0.5)
@@ -33,7 +34,7 @@ def wrong_answer() -> None:
 
 def yay() -> None:
     # Load the sound
-    game_win_sound = pygame.mixer.Sound("CS50P/Final Project/sounds/yay.mp3")
+    game_win_sound = pygame.mixer.Sound(resource_path("Hangman-with-Pygame/sounds/yay.mp3"))
     
     # Set volume 35%
     game_win_sound.set_volume(0.35)
@@ -46,7 +47,7 @@ def yay() -> None:
 
 def game_over() -> None:
     # Load the sound
-    game_over_sound = pygame.mixer.Sound("CS50P/Final Project/sounds/game over.mp3")
+    game_over_sound = pygame.mixer.Sound(resource_path("Hangman-with-Pygame/sounds/game over.mp3"))
     
     # Set volume 60%
     game_over_sound.set_volume(0.6)
@@ -59,7 +60,7 @@ def game_over() -> None:
 
 def game_start() -> None:
     # Load the sound
-    game_start_sound = pygame.mixer.Sound("CS50P/Final Project/sounds/game start.mp3")
+    game_start_sound = pygame.mixer.Sound(resource_path("Hangman-with-Pygame/sounds/game start.mp3"))
     
     # Set volume 70%
     game_start_sound.set_volume(0.7)

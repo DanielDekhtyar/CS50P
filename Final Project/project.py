@@ -13,7 +13,7 @@ GitHub : https://github.com/DanielDekhtyar
 from typing import Tuple
 
 import pygame
-
+from utils.resource_path import resource_path
 from src import start_screen
 from src import game_loop
 from src import hangman_game

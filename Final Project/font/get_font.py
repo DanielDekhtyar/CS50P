@@ -1,4 +1,5 @@
 import os
+from utils.resource_path import resource_path
 
 
 def font(font_file):
@@ -10,7 +11,7 @@ def font(font_file):
     :return: the full path to the font file by joining the font folder path and the font filename.
     """
     # The path to the folder containing the font file
-    font_folder = r"CS50P\Final Project\font\fonts"
+    font_folder = resource_path(r"Hangman-with-Pygame\font\fonts")
 
     # The name of the TTF file
     font_filename = font_file

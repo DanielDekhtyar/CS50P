@@ -24,6 +24,7 @@ Returns:
 import pygame
 import string
 
+from utils.resource_path import resource_path
 from src import start_screen
 from classes.word import Word
 from classes.button import Button
@@ -90,8 +91,8 @@ def render_restart_button(screen: pygame.Surface) -> Button:
     the `rect` attribute of the `button` object.
     """
     # Load the image
-    image_folder_path: int = "CS50P/Final Project/images/"
-    image: pygame.Surface = pygame.image.load(f"{image_folder_path}restart.png")
+    image_folder_path: str = resource_path("Hangman-with-Pygame/images/")
+    image: pygame.Surface = pygame.image.load(resource_path(f"{image_folder_path}restart.png"))
 
     button_width = int(screen.get_width() * 0.035)
     button_height = int(screen.get_height() * 0.055)
@@ -196,7 +197,7 @@ def render_letter_buttons(screen: pygame.Surface, all_button_instances: list[But
     letter_images: dict[str, pygame.Surface] = {}
     for letter in string.ascii_uppercase:
         letter_images[letter] = pygame.image.load(
-            f"CS50P/Final Project/images/letters/{letter}.png"
+            resource_path(f"Hangman-with-Pygame/images/letters/{letter}.png")
         )
 
     # The dimensions of the buttons
@@ -292,7 +293,7 @@ def render_v_or_x_image(screen: pygame.Surface, button: Button, image_name) -> N
     image_name: The `image_name` parameter is a string that represents the name of the image file to
     be loaded. It should not include the file extension (e.g., ".png").
     """
-    image = pygame.image.load(f"CS50P/Final Project/images/{image_name}.png")
+    image = pygame.image.load(resource_path(f"Hangman-with-Pygame/images/{image_name}.png"))
 
     pos_x = button.x
     pos_y = button.y
@@ -319,7 +320,7 @@ def render_the_hangman(screen: pygame.Surface, hangman_image_number: int) -> Non
     file from the "CS50P/Final Project/images/hangman/" directory.
     """
     hangman_image = pygame.image.load(
-        f"CS50P/Final Project/images/hangman/{hangman_image_number}.png"
+        resource_path(f"Hangman-with-Pygame/images/hangman/{hangman_image_number}.png")
     )
 
     image_height = int(screen.get_height() * 0.3)
